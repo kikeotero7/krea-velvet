@@ -84,7 +84,7 @@ section{padding-block:clamp(84px, 11vw, 150px)}
 /* Portada */
 .hero{position:relative; padding-top:calc(130px + env(safe-area-inset-top,0px)); padding-bottom:70px; overflow:hidden}
 .hero::before{content:""; position:absolute; width:900px; height:900px; right:-260px; top:-200px; border-radius:50%; background:radial-gradient(circle, color-mix(in srgb, var(--accent-2) 26%, transparent), transparent 62%); pointer-events:none}
-.hero .wrap{position:relative; display:grid; grid-template-columns:1.05fr .95fr; gap:64px; align-items:center}
+.hero .wrap{position:relative; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center}
 .hero .mark{width:86px; margin-bottom:28px}
 .hero h1{font-size:clamp(3.4rem, 7.6vw, 6.8rem)}
 .hero h1 em{display:block}
@@ -93,11 +93,11 @@ section{padding-block:clamp(84px, 11vw, 150px)}
 .hero .tags{display:flex; flex-wrap:wrap; gap:8px 26px; margin-top:44px; font-size:.72rem; letter-spacing:.24em; color:var(--faint)}
 .hero .tags .t-up{text-transform:uppercase}
 .hero .tags .handle{letter-spacing:.05em; font-size:.86rem}
-.hero-art{position:relative; justify-self:end; width:min(100%, 480px)}
-.hero-art .ph-img{aspect-ratio:1/1.08; box-shadow:var(--shadow)}
+.hero-art{position:relative; justify-self:end; width:min(100%, 580px)}
+.hero-art .ph-img{aspect-ratio:1120/1167; border-radius:26px; box-shadow:var(--shadow)}
 .hero-art .ph-img img{filter:none; object-position:50% 46%}
 .hero-art .ph-img::after{display:none}
-.hero-art .ph-img img{animation:slowzoom 18s ease-in-out infinite alternate}
+.hero-art .ph-img img{animation:none}
 @keyframes slowzoom{to{transform:scale(1.07)}}
 .hero-art .chip{position:absolute; left:-34px; bottom:44px; background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid var(--line); border-radius:18px; padding:16px 20px; max-width:230px}
 .hero-art .chip b{display:block; font-family:var(--display); font-weight:400; font-size:1.35rem; line-height:1.1}
@@ -109,7 +109,7 @@ section{padding-block:clamp(84px, 11vw, 150px)}
 @media (max-width:900px){
   .hero{padding-top:calc(96px + env(safe-area-inset-top,0px))}
   .hero .wrap{grid-template-columns:1fr; gap:44px}
-  .hero-art{justify-self:center; width:min(86%, 380px); order:-1}
+  .hero-art{justify-self:center; width:min(100%, 460px); order:-1}
   .hero-art .chip{left:-14px; bottom:26px; padding:12px 16px}
   .hero .mark{width:64px; margin-bottom:20px}
 }
@@ -329,8 +329,7 @@ footer .legal a:hover{color:var(--accent)}
       <div class="tags"><span class="t-up">Agenda abierta</span><span class="handle">@velvetcontour.beauty</span></div>
     </div>
     <div class="hero-art">
-      <div class="ring" aria-hidden="true"></div>
-      <div class="ph-img arch"><img src="foto-portada.webp" alt="Sello de Velvet Contour en cobre sobre satén, con polvos y brochas" fetchpriority="high"></div>
+      <div class="ph-img"><img src="foto-portada.webp" alt="Sello de Velvet Contour en cobre sobre satén, con polvos y brochas" fetchpriority="high"></div>
       <div class="chip"><b>A domicilio</b><span>Novias · invitadas · madrinas · eventos</span></div>
     </div>
   </div>
