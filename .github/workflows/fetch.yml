@@ -1,0 +1,18 @@
+name: fetch-portfolio-images
+on:
+  push:
+    branches: [portfolio-assets]
+    paths: [urls.txt]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p img
+          while read u; do id=$(echo "$u" | sed -E 's#.*/(photo-[^?]+).*#\1#'); curl -sSL "$u" -o "img/$id.jpg"; done < urls.txt
+          ls -la img
+          git config user.name "github-actions"; git config user.email "actions@github.com"
+          git add img && git commit -m "imagenes" && git push
