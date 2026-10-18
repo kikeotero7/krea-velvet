@@ -1,264 +1,326 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Velvet Contour</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="canonical" href="https://velvet.kreadigitalstudio.es/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Velvet Contour · El estudio de belleza que va contigo">
+<meta property="og:description" content="Atelier de maquillaje a domicilio para novias, invitadas, madrinas y eventos.">
+<meta property="og:url" content="https://velvet.kreadigitalstudio.es/">
+<meta property="og:image" content="https://velvet.kreadigitalstudio.es/og-velvet.jpg">
+<meta name="theme-color" content="#130C09">
+<link rel="icon" href="sello-sin-texto.webp">
 <meta name="description" content="Velvet Contour · Atelier de maquillaje a domicilio para novias, invitadas, madrinas y eventos.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preload" href="fonts/CormorantGaramond.woff" as="font" type="font/woff" crossorigin>
 <style>
-/* Layout: banda oscura de portada como el cartel 1, cuerpo crema con secciones en columna y una barra de cita fija en móvil */
+@font-face{font-family:'Cormorant Garamond';src:url('fonts/CormorantGaramond.woff') format('woff');font-weight:300 700;font-style:normal;font-display:swap}
+@font-face{font-family:'Cormorant Garamond';src:url('fonts/CormorantGaramond-Italic.woff') format('woff');font-weight:300 700;font-style:italic;font-display:swap}
+@font-face{font-family:'Montserrat';src:url('fonts/Montserrat.woff') format('woff');font-weight:300 700;font-style:normal;font-display:swap}
+</style>
+<style>
+/* Propuesta B · editorial con arcos. Oscura completa por defecto, clara completa con data-look="clara". */
 :root{
-  --bg:#F6EEE4; --surface:#FCF7F1; --ink:#2A1813; --muted:#6A4F42; --line:#E0CDBD;
-  --copper:#9C4E26; --copper-soft:#D9935F; --espresso:#1D110D; --espresso-2:#2E1B14; --cream:#F3E8DC; --on-copper:#1F110C;
-  --display:'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
-  --body:'Montserrat', 'Helvetica Neue', Helvetica, sans-serif;
-  --gutter-l:max(16px, env(safe-area-inset-left, 0px)); --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+  --bg:#130C09; --bg-2:#1B120E; --surface:#221712; --ink:#F3E8DC; --muted:#BDA797; --faint:#8E7666;
+  --line:rgba(227,165,116,.16); --accent:#DE9A66; --accent-2:#B8693A; --on-accent:#1A0F0B;
+  --veil:rgba(19,12,9,.72); --shadow:0 30px 60px -34px rgba(0,0,0,.75);
+  --display:'Cormorant Garamond', Georgia, serif; --body:'Montserrat', 'Helvetica Neue', sans-serif;
+  --g:max(18px, env(safe-area-inset-left,0px)); --gr:max(18px, env(safe-area-inset-right,0px));
+  color-scheme:dark;
 }
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --bg:#150C09; --surface:#20130E; --ink:#F2E6DA; --muted:#C2AB9B; --line:#3A2820; --copper:#E3A574; --copper-soft:#E9B489; color-scheme:dark } }
-:root[data-theme="dark"]{ --bg:#150C09; --surface:#20130E; --ink:#F2E6DA; --muted:#C2AB9B; --line:#3A2820; --copper:#E3A574; --copper-soft:#E9B489; color-scheme:dark }
-
+:root[data-look="clara"]{
+  --bg:#F7F0E7; --bg-2:#EFE4D7; --surface:#FFFCF8; --ink:#2A1A13; --muted:#6C5246; --faint:#9C8172;
+  --line:#E3D2C1; --accent:#9C4E26; --accent-2:#7E3A1A; --on-accent:#FFF8F1;
+  --veil:rgba(247,240,231,.74); --shadow:0 30px 60px -36px rgba(74,40,24,.45);
+  color-scheme:light;
+}
 [hidden]{display:none!important}
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg); color:var(--ink); font-family:var(--body); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased}
-img{max-width:100%; display:block}
-a{color:var(--copper)}
-:focus-visible{outline:2px solid var(--copper-soft); outline-offset:3px; border-radius:4px}
-.wrap{max-width:1160px; margin:0 auto; padding-left:var(--gutter-l); padding-right:var(--gutter-r)}
-h1,h2,h3{font-family:var(--display); font-weight:400; text-wrap:balance; margin:0; line-height:1.02}
-h2{font-size:clamp(2.6rem, 6vw, 4.2rem); letter-spacing:-.01em}
-h2 em, h1 em{font-style:italic; font-weight:500}
-h1 em.metal{display:inline-block}
-.eyebrow{font-size:.74rem; letter-spacing:.32em; text-transform:uppercase; color:var(--copper); font-weight:500}
-.lead{font-size:1.06rem; color:var(--muted); max-width:58ch}
-.metal{display:inline-block; padding:.04em .06em .22em 0; margin-bottom:-.16em; background:linear-gradient(100deg,#9A4A22 0%,#E9A873 38%,#C46F3A 58%,#F0B98A 78%,#8E431F 100%); -webkit-background-clip:text; background-clip:text; color:transparent}
-section{padding-block:clamp(72px, 10vw, 128px)}
-.btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:48px; padding:0 26px; border-radius:999px; font:600 .78rem/1 var(--body); letter-spacing:.2em; text-transform:uppercase; text-decoration:none; border:1px solid transparent; cursor:pointer; transition:transform .2s ease, background .2s ease}
+body{background:var(--bg); color:var(--ink); font-family:var(--body); font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased; transition:background .4s ease, color .4s ease}
+img{display:block; max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:6px}
+.wrap{max-width:1200px; margin:0 auto; padding-left:var(--g); padding-right:var(--gr)}
+h1,h2,h3{font-family:var(--display); font-weight:300; line-height:.98; letter-spacing:-.01em; text-wrap:balance}
+h2{font-size:clamp(2.7rem, 5.6vw, 4.6rem)}
+h2 em, h1 em{font-style:italic; font-weight:400; color:var(--accent)}
+.label{font-size:.72rem; letter-spacing:.28em; text-transform:uppercase; color:var(--accent); font-weight:500}
+.lead{color:var(--muted); font-size:1.05rem; max-width:52ch}
+section{padding-block:clamp(84px, 11vw, 150px)}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:50px; padding:0 28px; border-radius:999px; font:600 .76rem/1 var(--body); letter-spacing:.2em; text-transform:uppercase; text-decoration:none; border:1px solid transparent; cursor:pointer; transition:transform .25s ease, background .25s ease, color .25s ease}
 .btn:hover{transform:translateY(-2px)}
-.btn-copper{background:linear-gradient(100deg,#B5602F,#E3A574 55%,#C46F3A); color:var(--on-copper)}
-.btn-ghost{border-color:rgba(227,165,116,.5); color:var(--cream); background:transparent}
-.btn-line{border-color:var(--copper); color:var(--copper); background:transparent}
+.btn-fill{background:linear-gradient(100deg,#B5602F,#E3A574 55%,#C46F3A); color:#1F110C}
+.btn-line{border-color:color-mix(in srgb, var(--accent) 55%, transparent); color:var(--ink); background:transparent}
+.btn-line:hover{background:color-mix(in srgb, var(--accent) 12%, transparent)}
+
+/* Foto: tono cobre común a todas */
+.ph-img{position:relative; overflow:hidden; background:linear-gradient(160deg,#3A241A,#1B110D)}
+:root[data-look="clara"] .ph-img{background:linear-gradient(160deg,#E9D6C4,#D7BBA3)}
+.ph-img img{width:100%; height:100%; object-fit:cover; filter:sepia(.22) saturate(.9) contrast(1.04) brightness(.96); transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.ph-img::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(184,105,58,.10), rgba(60,30,18,.28)); mix-blend-mode:multiply; pointer-events:none}
+.arch{border-radius:999px 999px 26px 26px}
 
 /* Cabecera */
-.top{position:fixed; inset:0 0 auto 0; z-index:40; padding-top:env(safe-area-inset-top, 0px); transition:background .3s ease, box-shadow .3s ease}
-.top.solid{background:rgba(29,17,13,.92); backdrop-filter:blur(10px); box-shadow:0 1px 0 rgba(227,165,116,.18)}
-.top .wrap{display:flex; align-items:center; justify-content:space-between; height:72px; gap:16px}
-.brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--cream)}
-.brand img{width:42px; height:42px; object-fit:contain}
-.brand span{font-family:var(--display); font-size:1.4rem; letter-spacing:.04em}
-@media (max-width:480px){ .nav{gap:10px} .brand span{font-size:1.15rem; white-space:nowrap} .brand img{width:36px; height:36px} .top .wrap{gap:10px} }
-.nav{display:flex; align-items:center; gap:28px}
-.nav a.link{color:#E6D7C9; text-decoration:none; font-size:.74rem; letter-spacing:.24em; text-transform:uppercase}
-.nav a.link:hover{color:#F0B98A}
-.burger{display:none; width:48px; height:48px; border:1px solid rgba(227,165,116,.45); border-radius:50%; background:transparent; color:var(--cream); cursor:pointer; align-items:center; justify-content:center}
-.menu{position:fixed; inset:0; z-index:60; background:var(--espresso); color:var(--cream); display:flex; flex-direction:column; padding:calc(24px + env(safe-area-inset-top, 0px)) var(--gutter-r) calc(32px + env(safe-area-inset-bottom, 0px)) var(--gutter-l)}
+.top{position:fixed; inset:0 0 auto; z-index:40; padding-top:env(safe-area-inset-top,0px); transition:background .35s ease, box-shadow .35s ease}
+.top.solid{background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); box-shadow:0 1px 0 var(--line)}
+.top .wrap{display:flex; align-items:center; justify-content:space-between; height:76px; gap:16px}
+.brand{display:flex; align-items:center; gap:12px; text-decoration:none}
+.brand img{width:44px; height:44px}
+.brand span{font-family:var(--display); font-size:1.45rem; letter-spacing:.05em; white-space:nowrap}
+.nav{display:flex; align-items:center; gap:26px}
+.nav a.link{text-decoration:none; font-size:.72rem; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); white-space:nowrap}
+.nav a.link:hover{color:var(--accent)}
+.nav .btn{min-height:42px; padding:0 20px}
+.look{display:inline-flex; padding:3px; border-radius:999px; border:1px solid var(--line); gap:2px}
+.look button{appearance:none; border:0; background:transparent; color:var(--ink); min-height:36px; min-width:38px; padding:0 10px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer}
+.look button[aria-pressed="true"]{background:var(--accent); color:var(--on-accent)}
+.look svg{width:16px; height:16px}
+.look .txt{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+.burger{display:none; width:46px; height:46px; border:1px solid var(--line); border-radius:50%; background:transparent; color:var(--ink); cursor:pointer; align-items:center; justify-content:center}
+.menu{position:fixed; inset:0; z-index:60; background:var(--bg); display:flex; flex-direction:column; padding:calc(22px + env(safe-area-inset-top,0px)) var(--gr) calc(30px + env(safe-area-inset-bottom,0px)) var(--g)}
 .menu-head{display:flex; justify-content:space-between; align-items:center}
-.menu nav{display:flex; flex-direction:column; gap:14px; margin-top:48px}
-.menu nav a{font-family:var(--display); font-size:1.9rem; color:var(--cream); text-decoration:none}
-.menu nav a:hover{color:#F0B98A}
+.menu nav{display:flex; flex-direction:column; gap:12px; margin-top:44px}
+.menu nav a{font-family:var(--display); font-size:2.1rem; text-decoration:none}
 .menu .btn{margin-top:auto}
-@media (max-width:860px){ .nav a.link, .nav .btn{display:none} .burger{display:inline-flex} }
+@media (max-width:1100px){ .nav a.link, .nav .btn{display:none} .burger{display:inline-flex} }
+@media (max-width:480px){ .brand span{font-size:1.15rem} .brand img{width:36px; height:36px} .nav{gap:10px} }
 
 /* Portada */
-.hero{background:radial-gradient(circle at 70% 40%, #4A2A1E 0%, #2A1813 40%, var(--espresso) 100%); color:var(--cream); padding-top:calc(120px + env(safe-area-inset-top, 0px)); padding-bottom:88px; overflow:hidden; position:relative}
-.hero .wrap{display:grid; grid-template-columns:1.15fr .85fr; gap:48px; align-items:center}
-.hero h1{font-size:clamp(3.4rem, 8.4vw, 7rem); line-height:1.02; letter-spacing:-.015em}
-.hero h1 em{display:inline-block}
-.hero p{color:#D6C4B5; font-size:1.08rem; max-width:44ch; margin:28px 0 36px}
+.hero{position:relative; padding-top:calc(130px + env(safe-area-inset-top,0px)); padding-bottom:70px; overflow:hidden}
+.hero::before{content:""; position:absolute; width:900px; height:900px; right:-260px; top:-200px; border-radius:50%; background:radial-gradient(circle, color-mix(in srgb, var(--accent-2) 26%, transparent), transparent 62%); pointer-events:none}
+.hero .wrap{position:relative; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center}
+.hero .mark{width:86px; margin-bottom:28px}
+.hero h1{font-size:clamp(3.4rem, 7.6vw, 6.8rem)}
+.hero h1 em{display:block}
+.hero p{color:var(--muted); font-size:1.07rem; max-width:46ch; margin:30px 0 38px}
 .hero .actions{display:flex; flex-wrap:wrap; gap:14px}
-.hero .tags{display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:44px; font-size:.72rem; letter-spacing:.28em; text-transform:uppercase; color:#BFA897}
-.hero .tags .handle{text-transform:none; letter-spacing:.06em; font-size:.86rem}
-.seal{position:relative; justify-self:center; width:min(100%, 440px); aspect-ratio:1; max-width:100%}
-.seal::before{content:""; position:absolute; inset:12%; border-radius:50%; background:radial-gradient(circle, rgba(214,120,62,.45), transparent 70%); filter:blur(30px)}
-.seal img{position:relative; width:100%; height:100%; object-fit:contain; animation:float 7s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-10px) rotate(-1.5deg)}}
-.reveal-hero > *{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
-.reveal-hero > *:nth-child(2){animation-delay:.12s} .reveal-hero > *:nth-child(3){animation-delay:.24s} .reveal-hero > *:nth-child(4){animation-delay:.36s} .reveal-hero > *:nth-child(5){animation-delay:.48s}
-@keyframes rise{from{opacity:.001; transform:translateY(18px)}}
-@media (max-width:860px){ .hero .wrap{grid-template-columns:1fr} .seal{width:min(70%, 320px); order:-1} .hero{padding-top:calc(100px + env(safe-area-inset-top, 0px))} }
+.hero .tags{display:flex; flex-wrap:wrap; gap:8px 26px; margin-top:44px; font-size:.72rem; letter-spacing:.24em; color:var(--faint)}
+.hero .tags .t-up{text-transform:uppercase}
+.hero .tags .handle{letter-spacing:.05em; font-size:.86rem}
+.hero-art{position:relative; justify-self:end; width:min(100%, 580px)}
+.hero-art .ph-img{aspect-ratio:1120/1167; border-radius:26px; box-shadow:var(--shadow)}
+.hero-art .ph-img img{filter:none; object-position:50% 46%}
+.hero-art .ph-img::after{display:none}
+.hero-art .ph-img img{animation:none}
+@keyframes slowzoom{to{transform:scale(1.07)}}
+.hero-art .chip{position:absolute; left:-34px; bottom:44px; background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid var(--line); border-radius:18px; padding:16px 20px; max-width:230px}
+.hero-art .chip b{display:block; font-family:var(--display); font-weight:400; font-size:1.35rem; line-height:1.1}
+.hero-art .chip span{font-size:.78rem; color:var(--muted)}
+.hero-art .ring{position:absolute; inset:-16px -16px auto auto; width:120px; height:120px; border-radius:50%; border:1px solid color-mix(in srgb, var(--accent) 45%, transparent)}
+.reveal > *{animation:rise 1s cubic-bezier(.2,.7,.2,1) both}
+.reveal > *:nth-child(2){animation-delay:.1s} .reveal > *:nth-child(3){animation-delay:.2s} .reveal > *:nth-child(4){animation-delay:.3s} .reveal > *:nth-child(5){animation-delay:.4s} .reveal > *:nth-child(6){animation-delay:.5s}
+@keyframes rise{from{opacity:.001; transform:translateY(22px)}}
+@media (max-width:900px){
+  .hero{padding-top:calc(96px + env(safe-area-inset-top,0px))}
+  .hero .wrap{grid-template-columns:1fr; gap:44px}
+  .hero-art{justify-self:center; width:min(100%, 460px); order:-1}
+  .hero-art .chip{left:-14px; bottom:26px; padding:12px 16px}
+  .hero .mark{width:64px; margin-bottom:20px}
+}
 
 /* Banda */
-.band{background:var(--espresso-2); color:#E9C7A6; overflow:hidden; border-block:1px solid rgba(227,165,116,.2)}
-.band-track{display:flex; gap:44px; padding-block:18px; width:max-content; animation:slide 32s linear infinite; font-family:var(--display); font-style:italic; font-size:1.5rem; white-space:nowrap}
-.band-track span::after{content:"✦"; font-style:normal; font-size:.8rem; margin-left:44px; color:#C46F3A; vertical-align:middle}
+.band{border-block:1px solid var(--line); overflow:hidden; background:var(--bg-2)}
+.band-track{display:flex; gap:48px; padding-block:20px; width:max-content; animation:slide 36s linear infinite; font-family:var(--display); font-style:italic; font-size:1.55rem; color:var(--accent); white-space:nowrap}
+.band-track span::after{content:"✦"; font-style:normal; font-size:.75rem; margin-left:48px; color:var(--faint); vertical-align:middle}
 @keyframes slide{to{transform:translateX(-50%)}}
 
-/* Proceso */
-.head{display:flex; flex-direction:column; gap:16px; margin-bottom:56px}
-.steps{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:28px; counter-reset:paso}
-.step{border-top:1px solid var(--line); padding-top:26px; display:flex; flex-direction:column; gap:10px}
-.step b{font-family:var(--display); font-style:italic; font-weight:500; font-size:2.4rem; color:var(--copper); line-height:1}
-.step h3{font-size:1.8rem}
-.step p{color:var(--muted); margin:0}
-@media (max-width:760px){ .steps{grid-template-columns:1fr} }
+/* Cómo trabajamos */
+.how{display:grid; grid-template-columns:.8fr 1.2fr; gap:72px; align-items:center}
+.how .ph-img{aspect-ratio:3/4; box-shadow:var(--shadow)}
+.how h2{margin:18px 0 18px}
+.steps{list-style:none; margin-top:44px; display:grid; gap:0}
+.step{display:grid; grid-template-columns:76px 1fr; gap:22px; padding:28px 0; border-top:1px solid var(--line)}
+.step:last-child{border-bottom:1px solid var(--line)}
+.step .n{font-family:var(--display); font-style:italic; font-size:3.2rem; line-height:.9; color:var(--accent)}
+.step h3{font-size:1.85rem; font-weight:400}
+.step p{color:var(--muted); margin-top:8px; max-width:56ch}
+@media (max-width:900px){ .how{grid-template-columns:1fr; gap:44px} .how .ph-img{aspect-ratio:4/3.4; max-width:520px} .step{grid-template-columns:54px 1fr} .step .n{font-size:2.4rem} }
 
 /* Servicios */
-.services{background:var(--surface)}
-.svc-grid{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:20px}
-.svc{position:relative; overflow:hidden; border:1px solid var(--line); border-radius:22px; padding:34px 30px 30px; display:flex; flex-direction:column; gap:14px; background:var(--bg); min-width:0}
-.svc .wm{position:absolute; right:-60px; bottom:-60px; width:220px; opacity:.07; pointer-events:none}
-.svc .row{display:flex; justify-content:space-between; align-items:baseline; gap:12px}
-.svc h3{font-size:2.2rem}
-.svc .card-tag{font-size:.68rem; letter-spacing:.3em; text-transform:uppercase; color:var(--muted); margin-bottom:-6px}
-.svc .when{font-size:.7rem; letter-spacing:.26em; text-transform:uppercase; color:var(--copper)}
-.svc p{color:var(--muted); margin:0; max-width:46ch}
-.svc ul{margin:4px 0 8px; padding:0; list-style:none; display:flex; flex-wrap:wrap; gap:8px}
-.svc li{font-size:.76rem; padding:6px 12px; border-radius:999px; border:1px solid var(--line); color:var(--ink)}
-.svc .foot{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:auto; padding-top:8px; flex-wrap:wrap}
-.svc .price{font-size:.82rem; color:var(--muted)}
-.svc .price strong{font-family:var(--display); font-size:1.6rem; color:var(--ink); font-weight:500}
-@media (max-width:760px){ .svc-grid{grid-template-columns:1fr} }
+.services{background:var(--bg-2)}
+.s-head{display:flex; justify-content:space-between; align-items:end; gap:32px; flex-wrap:wrap; margin-bottom:56px}
+.s-head h2{margin-top:16px}
+.svc-grid{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:22px}
+.svc{display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--line); border-radius:999px 999px 24px 24px; overflow:hidden; min-width:0}
+.svc .ph-img{aspect-ratio:1/1.05; border-radius:999px 999px 0 0}
+.svc-body{padding:24px 22px 24px; display:flex; flex-direction:column; gap:12px; flex:1}
+.card-tag{font-size:.66rem; letter-spacing:.28em; text-transform:uppercase; color:var(--faint)}
+.svc h3{font-size:2rem; font-weight:400}
+.svc .when{font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--accent)}
+.svc p{color:var(--muted); font-size:.92rem}
+.svc ul{list-style:none; display:flex; flex-wrap:wrap; gap:6px}
+.svc li{font-size:.72rem; padding:5px 11px; border-radius:999px; border:1px solid var(--line)}
+.svc .foot{margin-top:auto; padding-top:10px; display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap}
+.svc .price{font-size:.8rem; color:var(--muted)}
+.svc .price strong{font-family:var(--display); font-weight:400; font-size:1.3rem; color:var(--ink)}
+.svc .btn{min-height:42px; padding:0 18px}
+@media (max-width:1100px){ .svc-grid{grid-template-columns:repeat(2, minmax(0,1fr))} }
+@media (max-width:640px){ .svc-grid{grid-template-columns:1fr} .svc{border-radius:200px 200px 22px 22px} .svc .ph-img{aspect-ratio:1/.85} }
 
 /* Orientador */
-.quiz{background:var(--espresso); color:var(--cream)}
-.quiz .lead{color:#D2BFAF}
-.quiz-box{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start}
-.q{border:0; padding:0; margin:0 0 26px}
-.q legend{font-family:var(--display); font-size:1.6rem; margin-bottom:12px}
+.quiz{position:relative; overflow:hidden}
+.quiz-bg{position:absolute; inset:0 0 0 auto; width:52%; pointer-events:none; -webkit-mask-image:linear-gradient(90deg, transparent, #000 55%); mask-image:linear-gradient(90deg, transparent, #000 55%)}
+.quiz-bg img{width:100%; height:100%; object-fit:cover; opacity:.42; filter:sepia(.3) saturate(.9)}
+:root[data-look="clara"] .quiz-bg img{opacity:.5; mix-blend-mode:multiply}
+.quiz .wrap{position:relative; display:grid; grid-template-columns:1fr .9fr; gap:56px; align-items:start}
+.quiz h2{margin:16px 0 16px}
+.q{border:0; margin:0 0 26px}
+.q legend{font-family:var(--display); font-size:1.65rem; margin-bottom:12px}
 .opts{display:flex; flex-wrap:wrap; gap:10px}
 .opts label{position:relative}
 .opts input{position:absolute; opacity:0; inset:0}
-.opts span{display:inline-flex; min-height:44px; align-items:center; padding:0 18px; border:1px solid rgba(227,165,116,.4); border-radius:999px; font-size:.86rem; cursor:pointer; transition:background .2s ease, color .2s ease}
-.opts input:checked + span{background:#E3A574; color:var(--on-copper); border-color:#E3A574}
-.opts input:focus-visible + span{outline:2px solid #F0B98A; outline-offset:3px}
-.result{border:1px solid rgba(227,165,116,.35); border-radius:24px; padding:32px; background:linear-gradient(160deg, rgba(227,165,116,.10), rgba(227,165,116,.02)); display:flex; flex-direction:column; gap:14px; position:sticky; top:96px}
-.result small{font-size:.7rem; letter-spacing:.3em; text-transform:uppercase; color:#E3A574}
-.result h3{font-size:2.6rem}
-.result p{color:#D2BFAF; margin:0}
-@media (max-width:860px){ .quiz-box{grid-template-columns:1fr} .result{position:static} }
+.opts span{display:inline-flex; min-height:44px; align-items:center; padding:0 18px; border:1px solid var(--line); border-radius:999px; font-size:.86rem; cursor:pointer; background:color-mix(in srgb, var(--surface) 55%, transparent); transition:background .2s ease, color .2s ease}
+.opts input:checked + span{background:var(--accent); color:var(--on-accent); border-color:var(--accent)}
+.opts input:focus-visible + span{outline:2px solid var(--accent); outline-offset:3px}
+.result{position:sticky; top:104px; border:1px solid var(--line); border-radius:999px 999px 26px 26px; padding:76px 34px 34px; text-align:center; background:color-mix(in srgb, var(--surface) 72%, transparent); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); display:flex; flex-direction:column; align-items:center; gap:14px}
+.result .mk{width:58px; opacity:.9}
+.result h3{font-size:2.4rem; font-weight:400}
+.result p{color:var(--muted); margin:0; max-width:40ch}
+#rWhen{color:var(--accent)}
+@media (max-width:900px){ .quiz .wrap{grid-template-columns:1fr} .result{position:static; border-radius:200px 200px 24px 24px; padding-top:64px} .quiz-bg{width:100%; height:45%; top:auto; -webkit-mask-image:linear-gradient(180deg, transparent, #000 60%); mask-image:linear-gradient(180deg, transparent, #000 60%)} }
 
 /* Técnicas */
-.tech{display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:56px; align-items:start}
-.tabs{display:flex; flex-direction:column; gap:4px}
-.tab{appearance:none; background:none; border:0; border-bottom:1px solid var(--line); text-align:left; padding:16px 0; font-family:var(--display); font-size:1.7rem; color:var(--muted); cursor:pointer; display:flex; justify-content:space-between; align-items:center}
-.tab[aria-selected="true"]{color:var(--ink)}
-.tab[aria-selected="true"]::after{content:""; width:10px; height:10px; border-radius:50%; background:var(--copper)}
-.panel{border-radius:24px; padding:38px; background:var(--surface); border:1px solid var(--line); min-height:300px; display:flex; flex-direction:column; gap:16px; position:relative; overflow:hidden}
-.panel h3{font-size:2.4rem}
+.tech-grid{display:grid; grid-template-columns:.95fr 1.05fr; gap:64px; align-items:center; margin-top:56px}
+.tabs{display:flex; flex-direction:column}
+.tab{appearance:none; background:none; border:0; border-bottom:1px solid var(--line); color:var(--faint); text-align:left; padding:18px 0; font-family:var(--display); font-size:1.9rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:color .2s ease, padding .3s ease}
+.tab:hover{color:var(--muted)}
+.tab[aria-selected="true"]{color:var(--ink); padding-left:12px}
+.tab[aria-selected="true"]::after{content:""; width:34px; height:1px; background:var(--accent)}
+.panel{position:relative; display:grid; grid-template-columns:1fr; border-radius:26px; overflow:hidden; background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow)}
+.panel .ph-img{aspect-ratio:16/10}
+.panel .ph-img img{opacity:0; transition:opacity .6s ease}
+.panel .ph-img img.in{opacity:1}
+.panel-body{padding:28px 30px 32px; display:flex; flex-direction:column; gap:12px}
+.panel h3{font-size:2.2rem; font-weight:400}
 .panel p{color:var(--muted); margin:0}
-.panel .wm{position:absolute; right:-40px; top:-40px; width:200px; opacity:.06}
 .chips{display:flex; flex-wrap:wrap; gap:8px}
-.chips span{font-size:.76rem; padding:6px 12px; border-radius:999px; background:var(--bg); border:1px solid var(--line)}
-@media (max-width:860px){ .tech{grid-template-columns:1fr; gap:28px} }
+.chips span{font-size:.74rem; padding:6px 12px; border-radius:999px; border:1px solid var(--line)}
+@media (max-width:900px){ .tech-grid{grid-template-columns:1fr; gap:30px} .tab{font-size:1.6rem} }
 
 /* Trabajos */
-.gallery{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:14px}
-.ph{aspect-ratio:4/5; border-radius:18px; background:linear-gradient(160deg, var(--surface), var(--bg)); border:1px dashed var(--line); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; text-align:center; padding:16px; color:var(--muted); font-size:.78rem; letter-spacing:.14em; text-transform:uppercase}
-.ph img{width:64px; opacity:.5}
-.ph:nth-child(2){transform:translateY(28px)}
-.ph:nth-child(5){transform:translateY(28px)}
-@media (max-width:760px){ .gallery{grid-template-columns:repeat(2, minmax(0,1fr))} .ph:nth-child(n){transform:none} }
+.works{background:var(--bg-2)}
+.gallery{display:grid; grid-template-columns:repeat(12, 1fr); gap:18px; margin-top:56px}
+.g{position:relative; grid-column:span 4}
+.g .ph-img{aspect-ratio:4/5; border-radius:22px}
+.g:nth-child(1) .ph-img, .g:nth-child(5) .ph-img{border-radius:999px 999px 22px 22px}
+.g:nth-child(2){transform:translateY(42px)} .g:nth-child(5){transform:translateY(42px)}
+.g figcaption{position:absolute; left:16px; bottom:16px; font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:#F3E8DC; background:rgba(19,12,9,.55); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); padding:7px 12px; border-radius:999px}
+@media (max-width:760px){ .g{grid-column:span 6} .g:nth-child(n){transform:none} .gallery{gap:12px} }
+
+.ph-img.empty{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; border:1px dashed color-mix(in srgb, var(--accent) 40%, transparent); background:radial-gradient(ellipse at 50% 40%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%), var(--surface)}
+.ph-img.empty::after{display:none}
+.ph-img.empty img.wm{width:38%; height:auto; object-fit:contain; filter:none; opacity:.5}
+.ph-img.empty span{font-size:.68rem; letter-spacing:.26em; text-transform:uppercase; color:var(--faint)}
+.g figcaption{background:color-mix(in srgb, var(--bg) 70%, transparent); color:var(--ink)}
 
 /* Cita */
-.book{background:var(--surface)}
-.book-grid{display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:56px}
-form{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+.book-grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:64px}
+.book h2{margin:16px 0 18px}
+form{display:grid; grid-template-columns:1fr 1fr; gap:16px; background:var(--surface); border:1px solid var(--line); border-radius:28px; padding:30px}
 .field{display:flex; flex-direction:column; gap:6px; min-width:0}
 .field.full{grid-column:1/-1}
-.field label{font-size:.7rem; letter-spacing:.24em; text-transform:uppercase; color:var(--muted)}
+.field label{font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--muted)}
 .field input, .field select, .field textarea{font:inherit; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:14px; min-height:50px; padding:12px 16px; width:100%}
 .field textarea{min-height:110px; resize:vertical}
-.field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--copper-soft); outline-offset:1px}
-.err{color:#B3261E; font-size:.82rem; min-height:1.2em; grid-column:1/-1}
-.prepared{grid-column:1/-1; border:1px solid var(--line); border-radius:18px; padding:20px; background:var(--bg); display:flex; flex-direction:column; gap:12px}
-.prepared pre{white-space:pre-wrap; font:inherit; margin:0; color:var(--ink)}
+.err{color:#D9534F; font-size:.82rem; min-height:1.2em; grid-column:1/-1}
+.prepared{grid-column:1/-1; border:1px solid var(--line); border-radius:18px; padding:20px; display:flex; flex-direction:column; gap:12px; background:var(--bg)}
+.prepared pre{white-space:pre-wrap; font:inherit}
 .prepared .acts{display:flex; flex-wrap:wrap; gap:10px}
-.contact-list{display:flex; flex-direction:column; gap:18px; margin-top:28px}
-.contact-list div{display:flex; flex-direction:column; gap:2px; border-top:1px solid var(--line); padding-top:14px}
-.contact-list small{font-size:.68rem; letter-spacing:.26em; text-transform:uppercase; color:var(--muted)}
-.contact-list span{font-family:var(--display); font-size:1.6rem; user-select:all}
-@media (max-width:860px){ .book-grid{grid-template-columns:1fr; gap:36px} form{grid-template-columns:1fr} }
+.contact-list{display:flex; flex-direction:column; margin-top:30px}
+.contact-list div{display:flex; flex-direction:column; gap:2px; border-top:1px solid var(--line); padding:16px 0}
+.contact-list small{font-size:.66rem; letter-spacing:.24em; text-transform:uppercase; color:var(--faint)}
+.contact-list span, .contact-list a{font-family:var(--display); font-size:1.55rem; text-decoration:none}
+.wa{width:22px; height:22px; flex:none}
+.wa-row{display:flex; align-items:center; gap:10px}
+@media (max-width:900px){ .book-grid{grid-template-columns:1fr; gap:36px} form{grid-template-columns:1fr; padding:22px} }
+
+.consent .ok{display:flex; gap:10px; align-items:flex-start; text-transform:none; letter-spacing:0; font-size:.82rem; color:var(--muted); cursor:pointer}
+.consent input{width:18px; height:18px; min-height:0; margin-top:2px; accent-color:var(--accent-2); flex:none}
+.consent a{color:var(--accent)}
 
 /* FAQ */
-details{border-top:1px solid var(--line); padding-block:20px}
+.faq{max-width:860px}
+.faq h2{margin:16px 0 34px}
+details{border-top:1px solid var(--line); padding-block:22px}
 details:last-child{border-bottom:1px solid var(--line)}
-summary{cursor:pointer; list-style:none; font-family:var(--display); font-size:1.6rem; display:flex; justify-content:space-between; gap:16px; align-items:center}
+summary{cursor:pointer; list-style:none; font-family:var(--display); font-size:1.65rem; display:flex; justify-content:space-between; gap:16px; align-items:center}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+"; font-family:var(--body); font-weight:400; font-size:1.4rem; color:var(--copper); transition:transform .2s ease}
+summary::after{content:"+"; font-family:var(--body); font-weight:300; font-size:1.5rem; color:var(--accent); transition:transform .25s ease}
 details[open] summary::after{transform:rotate(45deg)}
-details p{color:var(--muted); margin:12px 0 0; max-width:62ch}
-.faq-wrap{max-width:820px}
+details p{color:var(--muted); margin-top:12px; max-width:64ch}
 
 /* Cierre */
-.close{background:var(--espresso); color:var(--cream); text-align:center; position:relative; overflow:hidden}
-.close img.big{width:min(220px, 50%); margin:0 auto 28px}
-.close h2{font-size:clamp(2.8rem, 7vw, 5.4rem)}
-.close p{color:#D2BFAF; margin:20px auto 34px; max-width:46ch}
-footer{background:var(--espresso); color:#9E8878; font-size:.76rem; padding-block:28px calc(28px + env(safe-area-inset-bottom, 0px)); border-top:1px solid rgba(227,165,116,.16)}
-footer .wrap{display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px}
-footer a{color:#D9A37A}
+.close{position:relative; overflow:hidden; text-align:center; padding-block:clamp(110px, 14vw, 190px)}
+.close-bg{position:absolute; inset:0}
+.close-bg img{width:100%; height:100%; object-fit:cover; opacity:.55; filter:sepia(.25) saturate(.95); -webkit-mask-image:radial-gradient(ellipse 70% 80% at 50% 50%, #000 25%, transparent 78%); mask-image:radial-gradient(ellipse 70% 80% at 50% 50%, #000 25%, transparent 78%)}
+:root[data-look="clara"] .close-bg img{opacity:.6; mix-blend-mode:multiply}
+.close::after{content:""; position:absolute; inset:0; background:radial-gradient(ellipse 42% 46% at 50% 52%, var(--veil), transparent 100%)}
+.close .wrap{position:relative; z-index:1}
+.close .big{width:min(190px, 46%); margin:0 auto 26px}
+.close h2{font-size:clamp(2.8rem, 6.6vw, 5.4rem)}
+.close p{color:var(--muted); max-width:46ch; margin:20px auto 34px}
+.close .acts{display:flex; flex-wrap:wrap; gap:14px; justify-content:center}
+footer{border-top:1px solid var(--line); padding-block:28px calc(28px + env(safe-area-inset-bottom,0px)); font-size:.74rem; color:var(--faint)}
+footer .wrap{display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center}
 
-/* Botones flotantes: cita y WhatsApp, en vertical a la izquierda */
-.fab{position:fixed; z-index:45; left:max(14px, calc(env(safe-area-inset-left, 0px) + 10px)); bottom:calc(18px + env(safe-area-inset-bottom, 0px)); display:flex; flex-direction:column; gap:10px; opacity:0; transform:translateY(12px); pointer-events:none; transition:opacity .35s ease, transform .35s ease}
+footer .legal{display:flex; gap:18px; flex-wrap:wrap; justify-content:center}
+footer .legal a{color:var(--muted); text-decoration:none}
+footer .legal a:hover{color:var(--accent)}
+
+/* Botones flotantes */
+.fab{position:fixed; z-index:45; left:max(14px, calc(env(safe-area-inset-left,0px) + 10px)); bottom:calc(18px + env(safe-area-inset-bottom,0px)); display:flex; flex-direction:column; gap:10px; opacity:0; transform:translateY(12px); pointer-events:none; transition:opacity .35s ease, transform .35s ease}
 .fab.on{opacity:1; transform:none; pointer-events:auto}
-.fab a{width:50px; height:50px; border-radius:50%; display:grid; place-items:center; text-decoration:none; box-shadow:0 6px 18px rgba(29,17,13,.22); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); opacity:.88; transition:opacity .2s ease, transform .2s ease}
-.fab a:hover, .fab a:focus-visible{opacity:1; transform:scale(1.06)}
-.fab .f-cita{background:linear-gradient(135deg,#B5602F,#E3A574 60%,#C46F3A); color:var(--on-copper)}
-.fab .f-wa{background:rgba(29,17,13,.55); border:1px solid rgba(227,165,116,.35)}
+.fab a{width:52px; height:52px; border-radius:50%; display:grid; place-items:center; box-shadow:0 8px 22px rgba(0,0,0,.3)}
+.fab .f-cita{background:linear-gradient(135deg,#B5602F,#E3A574 60%,#C46F3A); color:#1F110C}
+.fab .f-wa{background:var(--surface); border:1px solid var(--line)}
 .fab .f-wa .wa{width:28px; height:28px}
 .fab svg.cal{width:22px; height:22px}
-:root[data-look="clara"] .fab .f-wa{background:rgba(255,255,255,.7); border-color:rgba(156,78,38,.25)}
-@media (prefers-reduced-motion: reduce){ .fab{transition:none} }
 
 /* Aparición */
-.rv{transition:transform .8s cubic-bezier(.2,.7,.2,1), opacity .8s ease}
-.rv.pre{opacity:.35; transform:translateY(22px)}
+.rv{transition:transform .9s cubic-bezier(.2,.7,.2,1), opacity .9s ease}
+.rv.pre{opacity:.2; transform:translateY(26px)}
 @media (prefers-reduced-motion: reduce){ *,*::before,*::after{animation:none!important; transition:none!important} .rv.pre{opacity:1; transform:none} html{scroll-behavior:auto} }
 
-/* Icono de WhatsApp */
-.wa{width:22px; height:22px; flex:none}
-.btn .wa{margin-left:-6px}
-.contact-list .wa-row{display:flex; align-items:center; gap:10px}
-.contact-list .wa-row .wa{width:26px; height:26px}
-
-/* Selector de versión: oscura / clara */
-.look{display:inline-flex; align-items:center; padding:3px; border-radius:999px; border:1px solid rgba(227,165,116,.45); gap:2px}
-.look button{appearance:none; border:0; background:transparent; color:var(--cream); font:600 .66rem/1 var(--body); letter-spacing:.18em; text-transform:uppercase; min-height:38px; padding:0 14px; border-radius:999px; display:inline-flex; align-items:center; gap:8px; cursor:pointer}
-.look button[aria-pressed="true"]{background:#E3A574; color:var(--on-copper)}
-.look svg{width:16px; height:16px; flex:none}
-@media (max-width:860px){ .look .txt{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap} .look button{padding:0 11px; min-height:40px} }
-
-/* ===== Versión clara: sin negro, mismos contenidos ===== */
-:root[data-look="clara"]{ --bg:#F8F1E8; --surface:#FDF9F4; --ink:#2E1D16; --muted:#6A4F42; --line:#E6D3C2; --copper:#9C4E26; --copper-soft:#C9804F; color-scheme:light }
-:root[data-look="clara"] .metal{background-image:linear-gradient(100deg,#7E3A1A 0%,#C9733D 40%,#9A4A22 62%,#D88A55 82%,#7A3818 100%)}
-:root[data-look="clara"] .btn-ghost{border-color:rgba(156,78,38,.45); color:var(--ink)}
-:root[data-look="clara"] .top.solid{background:rgba(248,241,232,.93); box-shadow:0 1px 0 var(--line)}
-:root[data-look="clara"] .brand{color:var(--ink)}
-:root[data-look="clara"] .nav a.link{color:#4A3329}
-:root[data-look="clara"] .nav a.link:hover{color:var(--copper)}
-:root[data-look="clara"] .burger{border-color:rgba(156,78,38,.4); color:var(--ink)}
-:root[data-look="clara"] .look{border-color:rgba(156,78,38,.4)}
-:root[data-look="clara"] .look button{color:var(--ink)}
-:root[data-look="clara"] .look button[aria-pressed="true"]{background:var(--copper); color:#FFF8F1}
-:root[data-look="clara"] .menu{background:var(--bg); color:var(--ink)}
-:root[data-look="clara"] .menu nav a{color:var(--ink)}
-:root[data-look="clara"] .menu nav a:hover{color:var(--copper)}
-:root[data-look="clara"] .hero{background:radial-gradient(circle at 72% 38%, #F4D9C3 0%, #F5E7DA 42%, #F9F2EA 100%); color:var(--ink)}
-:root[data-look="clara"] .hero .eyebrow{color:var(--copper)!important}
-:root[data-look="clara"] .hero p{color:var(--muted)}
-:root[data-look="clara"] .hero .tags{color:#8A6F60}
-:root[data-look="clara"] .seal::before{background:radial-gradient(circle, rgba(214,120,62,.28), transparent 70%)}
-:root[data-look="clara"] .band{background:#EBD9C8; color:#7E3A1A; border-color:rgba(156,78,38,.16)}
-:root[data-look="clara"] .band-track span::after{color:#B5602F}
-:root[data-look="clara"] .quiz{background:#F2E3D6; color:var(--ink)}
-:root[data-look="clara"] .quiz .lead{color:var(--muted)}
-:root[data-look="clara"] .quiz .eyebrow{color:var(--copper)!important}
-:root[data-look="clara"] .opts span{border-color:rgba(156,78,38,.35); background:rgba(255,255,255,.4)}
-:root[data-look="clara"] .opts input:checked + span{background:var(--copper); border-color:var(--copper); color:#FFF8F1}
-:root[data-look="clara"] .opts input:focus-visible + span{outline-color:var(--copper)}
-:root[data-look="clara"] .result{border-color:rgba(156,78,38,.28); background:rgba(255,255,255,.55)}
-:root[data-look="clara"] .result small{color:var(--copper)}
-:root[data-look="clara"] .result p{color:var(--muted)}
-:root[data-look="clara"] #rWhen{color:#8E431F!important}
-:root[data-look="clara"] .close{background:linear-gradient(180deg,#F0DFCF,#F8EEE4); color:var(--ink)}
-:root[data-look="clara"] .close p{color:var(--muted)}
-:root[data-look="clara"] footer{background:#EBD9C8; color:#6A4F42; border-top-color:rgba(156,78,38,.16)}
-:root[data-look="clara"] footer a{color:var(--copper)}
-.brand span,.nav a.link,.nav .btn{white-space:nowrap}
-@media (max-width:1480px) and (min-width:1101px){ .nav{gap:22px} .look .txt{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap} .look button{padding:0 11px} }
-@media (max-width:1100px){ .nav a.link, .nav .btn{display:none} .burger{display:inline-flex} }
+/* ===== B2 · matices ===== */
+/* Secciones crema intercaladas en la versión oscura */
+:root:not([data-look="clara"]) #como, :root:not([data-look="clara"]) #trabajos, :root:not([data-look="clara"]) #preguntas{
+  --bg:#F4EADF; --bg-2:#F4EADF; --surface:#FFFBF6; --ink:#2A1A13; --muted:#6A5044; --faint:#9A7F70;
+  --line:#E0CCBA; --accent:#9C4E26; --accent-2:#7E3A1A; --on-accent:#FFF8F1; --shadow:0 30px 60px -36px rgba(74,40,24,.42);
+  background:var(--bg); color:var(--ink); color-scheme:light}
+:root:not([data-look="clara"]) #trabajos .ph-img.empty{background:radial-gradient(ellipse at 50% 40%, rgba(156,78,38,.10), transparent 70%), #FFFBF6}
+:root:not([data-look="clara"]) #como .ph-img{background:linear-gradient(160deg,#E9D6C4,#D7BBA3)}
+/* Textura de terciopelo sobre lo oscuro */
+:root:not([data-look="clara"]) body::before{content:""; position:fixed; inset:0; z-index:100; pointer-events:none; opacity:.055; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 .9 0 0 0 0 .8 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* Brillo cobre en las cursivas de los titulares */
+h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent) 38%, #F0B98A 55%, var(--accent) 72%, var(--accent-2) 100%); -webkit-background-clip:text; background-clip:text; color:transparent; padding-bottom:.08em}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){ h1 em, h2 em{color:var(--accent); background:none} }
+/* Fotos: fundido al cargar y acercamiento al pasar el ratón en servicios */
+.ph-img img{transition:opacity .9s ease, transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.js .ph-img img:not(.ld){opacity:0}
+.ph-img img.ld{opacity:1}
+.panel .ph-img img:not(.in){opacity:0}
+.svc:hover .ph-img img, .svc:focus-within .ph-img img{transform:scale(1.05)}
+.svc{transition:border-color .3s ease, transform .4s cubic-bezier(.2,.7,.2,1)}
+.svc:hover{border-color:color-mix(in srgb, var(--accent) 45%, transparent)}
+/* Apariciones más discretas */
+.rv{transition:opacity 1s ease}
+.rv.pre{opacity:.15; transform:none}
+/* Pasos: número con filete cobre */
+.step .n{position:relative; padding-top:6px}
+.step .n::before{content:""; position:absolute; top:0; left:0; width:22px; height:1px; background:var(--accent)}
+/* Selección y portada */
+::selection{background:color-mix(in srgb, var(--accent) 35%, transparent); color:inherit}
+.hero-art .ph-img{outline:1px solid color-mix(in srgb, var(--accent) 22%, transparent); outline-offset:10px}
+@media (prefers-reduced-motion: reduce){ .ph-img img{opacity:1} }
 </style>
-
+</head>
+<body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="wa-logo" viewBox="0 0 24 24"><path fill="#25D366" d="M12 1.6a10.3 10.3 0 0 0-8.9 15.5L1.7 22.4l5.4-1.4A10.3 10.3 0 1 0 12 1.6z"/><path fill="#FFFFFF" d="M8.3 6.6c.3-.3.8-.3 1 .1l1.2 1.9c.2.3.2.8-.1 1.1l-.7.7c.7 1.5 1.9 2.7 3.4 3.4l.7-.7c.3-.3.8-.3 1.1-.1l1.9 1.2c.4.2.4.7.1 1l-.9.9c-.6.6-1.5.8-2.3.5-2.9-1.1-5.2-3.4-6.3-6.3-.3-.8-.1-1.7.5-2.3z"/></symbol></svg>
+
 <header class="top" id="top">
   <div class="wrap">
     <a class="brand" href="#inicio"><img src="sello-sin-texto.webp" alt=""><span>Velvet Contour</span></a>
@@ -267,7 +329,7 @@ footer a{color:#D9A37A}
       <a class="link" href="#servicios">Servicios</a>
       <a class="link" href="#tecnicas">Técnicas</a>
       <a class="link" href="#trabajos">Trabajos</a>
-      <a class="btn btn-copper" href="#cita">Pide cita</a>
+      <a class="btn btn-fill" href="#cita">Pide cita</a>
       <div class="look" role="group" aria-label="Versión de la web">
         <button type="button" data-look="oscura" aria-pressed="true" aria-label="Versión oscura"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><span class="txt">Oscura</span></button>
         <button type="button" data-look="clara" aria-pressed="false" aria-label="Versión clara"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg><span class="txt">Clara</span></button>
@@ -290,23 +352,26 @@ footer a{color:#D9A37A}
     <a href="#trabajos" data-close>Trabajos</a>
     <a href="#preguntas" data-close>Preguntas</a>
   </nav>
-  <a class="btn btn-copper" href="#cita" data-close>Pide tu cita</a>
+  <a class="btn btn-fill" href="#cita" data-close>Reserva tu cita</a>
 </div>
 
 <main>
 <section class="hero" id="inicio">
   <div class="wrap">
-    <div class="reveal-hero">
-      <span class="eyebrow" style="color:#E3A574">Atelier de maquillaje a domicilio</span>
-      <h1 style="margin-top:22px">El estudio de belleza <em class="metal">que va contigo.</em></h1>
+    <div class="reveal">
+      <span class="label">Atelier de maquillaje a domicilio</span>
+      <h1 style="margin-top:20px">El estudio de belleza <em>que va contigo.</em></h1>
       <p>Especialistas en novias, madrinas, invitadas y eventos. Preparamos tu piel y diseñamos un estilismo a medida en la tranquilidad de tu hogar, garantizando un acabado impecable y duradero para tu gran día.</p>
       <div class="actions">
-        <a class="btn btn-copper" href="#cita">Reserva tu cita</a>
-        <a class="btn btn-ghost" href="#orientador">Descubre tu estilo</a>
+        <a class="btn btn-fill" href="#cita">Reserva tu cita</a>
+        <a class="btn btn-line" href="#orientador">Descubre tu estilo</a>
       </div>
-      <div class="tags"><span>Agenda abierta</span><span class="handle">@velvetcontour.beauty</span></div>
+      <div class="tags"><span class="t-up">Agenda abierta</span><span class="handle">@velvetcontour.beauty</span></div>
     </div>
-    <div class="seal"><img src="sello-sin-texto.webp" alt="Sello de Velvet Contour: una V con perfil femenino en cobre"></div>
+    <div class="hero-art">
+      <div class="ph-img"><img src="foto-portada.webp" alt="Sello de Velvet Contour en cobre sobre satén, con polvos y brochas" fetchpriority="high"></div>
+      <div class="chip"><b>A domicilio</b><span>Novias · invitadas · madrinas · eventos</span></div>
+    </div>
   </div>
 </section>
 
@@ -318,107 +383,119 @@ footer a{color:#D9A37A}
 </div>
 
 <section id="como">
-  <div class="wrap">
-    <div class="head rv">
-      <span class="eyebrow">Cómo trabajamos</span>
-      <h2>El cuidado reside <em>en los detalles.</em></h2>
-      <p class="lead">Un proceso exclusivo en tres pasos, desde tu primera consulta hasta el retoque final de tu evento.</p>
-    </div>
-    <div class="steps">
-      <div class="step rv"><b>1</b><h3>Asesoramiento inicial</h3><p>Compartes con nosotras la fecha, ubicación, estilismo y el concepto que deseas. A partir de ahí, elaboramos una propuesta personalizada con un presupuesto cerrado.</p></div>
-      <div class="step rv"><b>2</b><h3>Diseño de tu estilismo</h3><p>Definimos tonalidades, intensidad y acabados adaptados a tus facciones. Para novias, realizamos una prueba previa garantizando absoluta tranquilidad e impecabilidad en tu día.</p></div>
-      <div class="step rv"><b>3</b><h3>Experiencia a domicilio</h3><p>Nos desplazamos con todo el equipamiento profesional necesario y productos de alta gama, bajo máximas garantías de higiene y cuidado facial. Preparamos tu piel y realizamos el servicio de maquillaje con total dedicación y serenidad. También ofrecemos atención a acompañantes (madres, hermanas o invitadas).</p></div>
+  <div class="wrap how">
+    <div class="ph-img arch rv"><img src="https://images.unsplash.com/photo-1764269719546-afc8567db7c6?auto=format&fit=crop&w=900&q=75" alt="Kit profesional de maquillaje sobre un tocador" loading="lazy"></div>
+    <div>
+      <div class="rv">
+        <span class="label">Cómo trabajamos</span>
+        <h2>El cuidado reside <em>en los detalles.</em></h2>
+        <p class="lead">Un proceso exclusivo en tres pasos, desde tu primera consulta hasta el retoque final de tu evento.</p>
+      </div>
+      <ol class="steps">
+        <li class="step rv"><span class="n">1</span><div><h3>Asesoramiento inicial</h3><p>Compartes con nosotras la fecha, ubicación, estilismo y el concepto que deseas. A partir de ahí, elaboramos una propuesta personalizada con un presupuesto cerrado.</p></div></li>
+        <li class="step rv"><span class="n">2</span><div><h3>Diseño de tu estilismo</h3><p>Definimos tonalidades, intensidad y acabados adaptados a tus facciones. Para novias, realizamos una prueba previa garantizando absoluta tranquilidad e impecabilidad en tu día.</p></div></li>
+        <li class="step rv"><span class="n">3</span><div><h3>Experiencia a domicilio</h3><p>Nos desplazamos con todo el equipamiento profesional necesario y productos de alta gama, bajo máximas garantías de higiene y cuidado facial. Preparamos tu piel y realizamos el servicio de maquillaje con total dedicación y serenidad. También ofrecemos atención a acompañantes (madres, hermanas o invitadas).</p></div></li>
+      </ol>
     </div>
   </div>
 </section>
 
 <section class="services" id="servicios">
   <div class="wrap">
-    <div class="head rv">
-      <span class="eyebrow">Servicios</span>
-      <h2>Un look para <em>cada ocasión.</em></h2>
+    <div class="s-head rv">
+      <div><span class="label">Servicios</span><h2>Un look para <em>cada ocasión.</em></h2></div>
       <p class="lead">Todos los servicios son a domicilio. El desplazamiento se incluye en el presupuesto según la zona.</p>
     </div>
     <div class="svc-grid">
-      <article class="svc rv"><img class="wm" src="sello-liso.webp" alt="">
-        <span class="card-tag">1. Tarjeta</span>
-        <div class="row"><h3>Novias</h3><span class="when">Con prueba</span></div>
-        <p>Prueba previa para definir un estilismo impecable. Diseñado para garantizar máxima durabilidad y perfección desde la ceremonia hasta el baile.</p>
-        <ul><li>Natural</li><li>Tendencia</li><li>Glam</li><li>Atrevida</li></ul>
-        <div class="foot"><span class="price">Precio <strong>[a confirmar]</strong></span><a class="btn btn-line" href="#cita" data-svc="Maquillaje de novia">Reservar</a></div>
+      <article class="svc rv">
+        <div class="ph-img"><img src="https://images.unsplash.com/photo-1774814304885-bb5cc796a6c3?auto=format&fit=crop&w=800&q=75" alt="Maquilladora preparando a la novia antes de la ceremonia" loading="lazy"></div>
+        <div class="svc-body">
+          <h3>Novias</h3><span class="when">Con prueba</span>
+          <p>Prueba previa para definir un estilismo impecable. Diseñado para garantizar máxima durabilidad y perfección desde la ceremonia hasta el baile.</p>
+          <ul><li>Natural</li><li>Tendencia</li><li>Glam</li><li>Atrevida</li></ul>
+          <div class="foot"><span class="price">Precio <strong>[a confirmar]</strong></span><a class="btn btn-line" href="#cita" data-svc="Maquillaje de novia">Reservar</a></div>
+        </div>
       </article>
-      <article class="svc rv"><img class="wm" src="sello-liso.webp" alt="">
-        <span class="card-tag">2. Tarjeta</span>
-        <div class="row"><h3>Invitadas</h3><span class="when">Bodas y fiestas</span></div>
-        <p>Desde acabados naturales y luminosos hasta ahumados sofisticados. Un diseño adaptado a tu estilismo, al horario del evento y a tu personalidad.</p>
-        <ul><li>Ahumados</li><li>Delineados</li><li>Piel luminosa</li></ul>
-        <div class="foot"><span class="price">Precio <strong>[a confirmar]</strong></span><a class="btn btn-line" href="#cita" data-svc="Maquillaje de invitada">Reservar</a></div>
+      <article class="svc rv">
+        <div class="ph-img"><img src="https://images.unsplash.com/photo-1764269715774-43b6b03bcfda?auto=format&fit=crop&w=700&q=75" alt="Maquilladora preparando a una clienta para una boda" loading="lazy"></div>
+        <div class="svc-body">
+          <h3>Invitadas</h3><span class="when">Bodas y fiestas</span>
+          <p>Desde acabados naturales y luminosos hasta ahumados sofisticados. Un diseño adaptado a tu estilismo, al horario del evento y a tu personalidad.</p>
+          <ul><li>Ahumados</li><li>Delineados</li><li>Piel luminosa</li></ul>
+          <div class="foot"><span class="price">Precio <strong>[a confirmar]</strong></span><a class="btn btn-line" href="#cita" data-svc="Maquillaje de invitada">Reservar</a></div>
+        </div>
       </article>
-      <article class="svc rv"><img class="wm" src="sello-liso.webp" alt="">
-        <span class="card-tag">3. Tarjeta</span>
-        <div class="row"><h3>Madrinas</h3><span class="when">Prueba opcional</span></div>
-        <p>Elegancia y equilibrio: preparación de piel madura, mirada definida con difuminados suaves y tonos en perfecta armonía.</p>
-        <ul><li>Piel madura</li><li>Mirada suave</li><li>Larga duración</li></ul>
-        <div class="foot"><span class="price">Precio <strong>[a confirmar]</strong></span><a class="btn btn-line" href="#cita" data-svc="Maquillaje de madrina">Reservar</a></div>
+      <article class="svc rv">
+        <div class="ph-img"><img src="https://images.unsplash.com/photo-1541806804831-1a25c338f8a9?auto=format&fit=crop&crop=faces&w=700&q=75" alt="Madrina maquillándose antes de la boda" loading="lazy"></div>
+        <div class="svc-body">
+          <h3>Madrinas</h3><span class="when">Prueba opcional</span>
+          <p>Elegancia y equilibrio: preparación de piel madura, mirada definida con difuminados suaves y tonos en perfecta armonía.</p>
+          <ul><li>Piel madura</li><li>Mirada suave</li><li>Larga duración</li></ul>
+          <div class="foot"><span class="price">Precio <strong>[a confirmar]</strong></span><a class="btn btn-line" href="#cita" data-svc="Maquillaje de madrina">Reservar</a></div>
+        </div>
       </article>
-      <article class="svc rv"><img class="wm" src="sello-liso.webp" alt="">
-        <span class="card-tag">4. Tarjeta</span>
-        <div class="row"><h3>Eventos y fotografía</h3><span class="when">Luz y cámara</span></div>
-        <p>Graduaciones, celebraciones especiales o sesiones fotográficas. Un maquillaje de alta definición diseñado para lucir impecable y favorecedor tanto al natural como ante la cámara.</p>
-        <ul><li>Fotografía</li><li>Celebraciones</li><li>Grupos</li></ul>
-        <div class="foot"><span class="price">Precio <strong>[a confirmar]</strong></span><a class="btn btn-line" href="#cita" data-svc="Evento o sesión de fotos">Reservar</a></div>
+      <article class="svc rv">
+        <div class="ph-img"><img src="https://images.unsplash.com/photo-1758613656229-d7434bf4b7ea?auto=format&fit=crop&w=700&q=75" alt="Maquilladora trabajando con un modelo en un estudio de fotografía" loading="lazy"></div>
+        <div class="svc-body">
+          <h3>Eventos y fotografía</h3><span class="when">Luz y cámara</span>
+          <p>Graduaciones, celebraciones especiales o sesiones fotográficas. Un maquillaje de alta definición diseñado para lucir impecable y favorecedor tanto al natural como ante la cámara.</p>
+          <ul><li>Fotografía</li><li>Celebraciones</li><li>Grupos</li></ul>
+          <div class="foot"><span class="price">Precio <strong>[a confirmar]</strong></span><a class="btn btn-line" href="#cita" data-svc="Evento o sesión de fotos">Reservar</a></div>
+        </div>
       </article>
     </div>
   </div>
 </section>
 
 <section class="quiz" id="orientador">
-  <div class="wrap quiz-box">
+  <div class="quiz-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1677001458966-de3f79363c12?auto=format&fit=crop&w=1100&q=75" alt="" loading="lazy"></div>
+  <div class="wrap">
     <div>
-      <div class="head rv" style="margin-bottom:36px">
-        <span class="eyebrow" style="color:#E3A574">Orientador</span>
-        <h2>¿Cuál es tu <em class="metal">estilo ideal?</em></h2>
+      <div class="rv" style="margin-bottom:36px">
+        <span class="label">Orientador</span>
+        <h2>¿Cuál es tu <em>estilo ideal?</em></h2>
         <p class="lead">Responde a tres breves preguntas y te propondremos la opción perfecta para ti.</p>
       </div>
       <fieldset class="q"><legend>¿Para qué ocasión?</legend>
         <div class="opts">
-          <label><input type="radio" name="oc" id="oc1" value="novia" checked><span>Mi boda</span></label>
-          <label><input type="radio" name="oc" id="oc2" value="invitada"><span>Soy invitada</span></label>
-          <label><input type="radio" name="oc" id="oc3" value="madrina"><span>Soy madrina</span></label>
-          <label><input type="radio" name="oc" id="oc4" value="evento"><span>Evento o fotos</span></label>
+          <label><input type="radio" name="oc" value="novia" checked><span>Mi boda</span></label>
+          <label><input type="radio" name="oc" value="invitada"><span>Soy invitada</span></label>
+          <label><input type="radio" name="oc" value="madrina"><span>Soy madrina</span></label>
+          <label><input type="radio" name="oc" value="evento"><span>Evento o fotos</span></label>
         </div></fieldset>
       <fieldset class="q"><legend>¿Qué estilo o acabado prefieres?</legend>
         <div class="opts">
-          <label><input type="radio" name="st" id="st1" value="natural" checked><span>Natural y luminosa</span></label>
-          <label><input type="radio" name="st" id="st2" value="elegante"><span>Suave y elegante</span></label>
-          <label><input type="radio" name="st" id="st3" value="glam"><span>Glamour y ahumado</span></label>
-          <label><input type="radio" name="st" id="st4" value="atrevida"><span>Sofisticada y audaz</span></label>
+          <label><input type="radio" name="st" value="natural" checked><span>Natural y luminosa</span></label>
+          <label><input type="radio" name="st" value="elegante"><span>Suave y elegante</span></label>
+          <label><input type="radio" name="st" value="glam"><span>Glamour y ahumado</span></label>
+          <label><input type="radio" name="st" value="atrevida"><span>Sofisticada y audaz</span></label>
         </div></fieldset>
       <fieldset class="q"><legend>¿Cuándo es?</legend>
         <div class="opts">
-          <label><input type="radio" name="wh" id="wh1" value="mes"><span>Este mes</span></label>
-          <label><input type="radio" name="wh" id="wh2" value="pronto" checked><span>De 1 a 6 meses</span></label>
-          <label><input type="radio" name="wh" id="wh3" value="lejos"><span>Más adelante</span></label>
+          <label><input type="radio" name="wh" value="mes"><span>Este mes</span></label>
+          <label><input type="radio" name="wh" value="pronto" checked><span>De 1 a 6 meses</span></label>
+          <label><input type="radio" name="wh" value="lejos"><span>Más adelante</span></label>
         </div></fieldset>
     </div>
     <div class="result rv" aria-live="polite">
-      <small>Tu propuesta</small>
+      <img class="mk" src="sello-sin-texto.webp" alt="">
+      <span class="label">Tu propuesta</span>
       <h3 id="rTitle">Novia natural luminosa</h3>
       <p id="rText"></p>
-      <p id="rWhen" style="color:#E9C7A6"></p>
-      <a class="btn btn-copper" href="#cita" id="rBtn" style="align-self:flex-start; margin-top:8px">Pedir esta propuesta</a>
+      <p id="rWhen"></p>
+      <a class="btn btn-fill" href="#cita" id="rBtn" style="margin-top:8px">Pedir esta propuesta</a>
     </div>
   </div>
 </section>
 
 <section id="tecnicas">
   <div class="wrap">
-    <div class="head rv">
-      <span class="eyebrow">Técnicas</span>
-      <h2>El lenguaje <em>del maquillaje.</em></h2>
-      <p class="lead">Las técnicas que dominamos y seguimos perfeccionando. Esta sección crece con cada curso.</p>
+    <div class="rv">
+      <span class="label">Técnicas</span>
+      <h2 style="margin-top:16px">El lenguaje <em>del maquillaje.</em></h2>
+      <p class="lead" style="margin-top:16px">Las técnicas que dominamos y seguimos perfeccionando. Esta sección crece con cada curso.</p>
     </div>
-    <div class="tech">
+    <div class="tech-grid">
       <div class="tabs" role="tablist" aria-label="Técnicas">
         <button class="tab" role="tab" id="t0" aria-selected="true" aria-controls="tpanel">Piel</button>
         <button class="tab" role="tab" id="t1" aria-selected="false" aria-controls="tpanel">Ahumados</button>
@@ -426,31 +503,33 @@ footer a{color:#D9A37A}
         <button class="tab" role="tab" id="t3" aria-selected="false" aria-controls="tpanel">Delineados</button>
         <button class="tab" role="tab" id="t4" aria-selected="false" aria-controls="tpanel">Maquillaje y cámara</button>
       </div>
-      <div class="panel" role="tabpanel" id="tpanel" aria-labelledby="t0">
-        <img class="wm" src="sello-liso.webp" alt="">
-        <span class="eyebrow" id="tNum">Técnica 1 de 5</span>
-        <h3 id="tTitle">Piel</h3>
-        <p id="tText"></p>
-        <div class="chips" id="tChips"></div>
+      <div class="panel rv" role="tabpanel" id="tpanel" aria-labelledby="t0">
+        <div class="ph-img"><img id="tImg" class="in" src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1000&q=75" alt="" loading="lazy"></div>
+        <div class="panel-body">
+          <span class="label" id="tNum">Técnica 1 de 5</span>
+          <h3 id="tTitle">Piel</h3>
+          <p id="tText"></p>
+          <div class="chips" id="tChips"></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="services" id="trabajos">
+<section class="works" id="trabajos">
   <div class="wrap">
-    <div class="head rv">
-      <span class="eyebrow">Trabajos</span>
-      <h2>Portfolio <em>en construcción.</em></h2>
-      <p class="lead">Aquí irán las fotos y vídeos de trabajos reales, con la marca de agua de Velvet Contour.</p>
+    <div class="rv">
+      <span class="label">Trabajos</span>
+      <h2 style="margin-top:16px">Portfolio <em>en construcción.</em></h2>
+      <p class="lead" style="margin-top:16px">Aquí irán las fotos y vídeos de trabajos reales, con la marca de agua de Velvet Contour.</p>
     </div>
     <div class="gallery">
-      <div class="ph"><img src="sello-liso.webp" alt="">Novia · próximamente</div>
-      <div class="ph"><img src="sello-liso.webp" alt="">Invitada · próximamente</div>
-      <div class="ph"><img src="sello-liso.webp" alt="">Antes y después</div>
-      <div class="ph"><img src="sello-liso.webp" alt="">Madrina · próximamente</div>
-      <div class="ph"><img src="sello-liso.webp" alt="">Sesión de fotos</div>
-      <div class="ph"><img src="sello-liso.webp" alt="">Detrás de cámara</div>
+      <figure class="g rv"><div class="ph-img empty"><img class="wm" src="sello-liso.webp" alt="" loading="lazy"><span>Próximamente</span></div><figcaption>Novia · próximamente</figcaption></figure>
+      <figure class="g rv"><div class="ph-img empty"><img class="wm" src="sello-liso.webp" alt="" loading="lazy"><span>Próximamente</span></div><figcaption>Invitada · próximamente</figcaption></figure>
+      <figure class="g rv"><div class="ph-img empty"><img class="wm" src="sello-liso.webp" alt="" loading="lazy"><span>Próximamente</span></div><figcaption>Antes y después</figcaption></figure>
+      <figure class="g rv"><div class="ph-img empty"><img class="wm" src="sello-liso.webp" alt="" loading="lazy"><span>Próximamente</span></div><figcaption>Madrina · próximamente</figcaption></figure>
+      <figure class="g rv"><div class="ph-img empty"><img class="wm" src="sello-liso.webp" alt="" loading="lazy"><span>Próximamente</span></div><figcaption>Sesión de fotos</figcaption></figure>
+      <figure class="g rv"><div class="ph-img empty"><img class="wm" src="sello-liso.webp" alt="" loading="lazy"><span>Próximamente</span></div><figcaption>Detrás de cámara</figcaption></figure>
     </div>
   </div>
 </section>
@@ -458,16 +537,16 @@ footer a{color:#D9A37A}
 <section class="book" id="cita">
   <div class="wrap book-grid">
     <div class="rv">
-      <span class="eyebrow">Pide tu cita</span>
-      <h2 style="margin-top:16px">Tu ocasión, <em>tu maquillaje.</em></h2>
-      <p class="lead" style="margin-top:18px">Rellena los datos y se prepara el mensaje para enviarlo por WhatsApp <svg class="wa" style="display:inline-block; vertical-align:-5px" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa-logo"/></svg>. No se envía nada hasta que tú lo decidas.</p>
+      <span class="label">Pide tu cita</span>
+      <h2>Tu ocasión, <em>tu maquillaje.</em></h2>
+      <p class="lead">Rellena los datos y se prepara el mensaje para enviarlo por WhatsApp. No se envía nada hasta que tú lo decidas.</p>
       <div class="contact-list">
         <div><small>WhatsApp</small><span class="wa-row"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa-logo"/></svg><span>+34 665 78 81 16</span></span></div>
-        <div><small>Instagram</small><span><a href="https://www.instagram.com/velvetcontour.beauty/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">@velvetcontour.beauty</a></span></div>
-        <div><small>Correo</small><span><a href="mailto:velvetcontour.beauty@gmail.com" style="color:inherit;text-decoration:none">velvetcontour.beauty@gmail.com</a></span></div>
+        <div><small>Instagram</small><a href="https://www.instagram.com/velvetcontour.beauty/" target="_blank" rel="noopener">@velvetcontour.beauty</a></div>
+        <div><small>Correo</small><a href="mailto:velvetcontour.beauty@gmail.com">velvetcontour.beauty@gmail.com</a></div>
       </div>
     </div>
-    <form id="form" novalidate>
+    <form id="form" novalidate class="rv">
       <div class="field"><label for="fName">Nombre</label><input id="fName" name="nombre" autocomplete="given-name" placeholder="Tu nombre"></div>
       <div class="field"><label for="fSvc">Servicio</label>
         <select id="fSvc" name="servicio">
@@ -478,13 +557,14 @@ footer a{color:#D9A37A}
       <div class="field"><label for="fPeople">Personas</label><select id="fPeople" name="personas"><option>Solo yo</option><option>2 personas</option><option>3 o 4 personas</option><option>5 o más</option></select></div>
       <div class="field"><label for="fStyle">Estilo</label><select id="fStyle" name="estilo"><option>Natural y luminoso</option><option>Suave y elegante</option><option>Glamour y ahumado</option><option>Sofisticado y audaz</option><option>Prefiero que me asesoréis</option></select></div>
       <div class="field full"><label for="fMsg">Detalles (opcional)</label><textarea id="fMsg" name="detalles" placeholder="Color del vestido, hora de la ceremonia, ideas que te gustan…"></textarea></div>
+      <div class="field full consent"><label class="ok"><input type="checkbox" id="fOk"><span>He leído y acepto la <a href="privacidad.html" target="_blank">política de privacidad</a>. Mis datos solo se usan para responder a mi solicitud de cita.</span></label></div>
       <div class="err" id="fErr" role="alert"></div>
-      <button class="btn btn-copper" type="submit" style="grid-column:1/-1">Preparar mensaje</button>
+      <button class="btn btn-fill" type="submit" style="grid-column:1/-1">Preparar mensaje</button>
       <div class="prepared" id="prepared" hidden>
-        <small class="eyebrow">Mensaje preparado</small>
+        <span class="label">Mensaje preparado</span>
         <pre id="prepText"></pre>
         <div class="acts">
-          <a class="btn btn-copper" id="waLink" href="https://wa.me/34665788116" target="_blank" rel="noopener"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa-logo"/></svg>Abrir WhatsApp</a>
+          <a class="btn btn-fill" id="waLink" href="https://wa.me/34665788116" target="_blank" rel="noopener"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa-logo"/></svg>Abrir WhatsApp</a>
           <button class="btn btn-line" type="button" id="copyBtn">Copiar mensaje</button>
         </div>
       </div>
@@ -493,11 +573,8 @@ footer a{color:#D9A37A}
 </section>
 
 <section id="preguntas">
-  <div class="wrap faq-wrap">
-    <div class="head rv" style="margin-bottom:32px">
-      <span class="eyebrow">Preguntas</span>
-      <h2>Antes de <em>reservar.</em></h2>
-    </div>
+  <div class="wrap faq">
+    <div class="rv"><span class="label">Preguntas</span><h2>Antes de <em>reservar.</em></h2></div>
     <details><summary>¿Hasta dónde te desplazas?</summary><p>Trabajamos a domicilio en [zona por confirmar]. Para otras localidades, cuéntanos dónde es y te decimos el coste del desplazamiento.</p></details>
     <details><summary>¿Con cuánta antelación reservo?</summary><p>Para bodas, cuanto antes mejor: las fechas de temporada se llenan con meses. Para invitadas y eventos suele bastar con unas semanas.</p></details>
     <details><summary>¿Cómo funciona la prueba de novia?</summary><p>Quedamos unas semanas antes, probamos el look con tu vestido y peinado en mente y ajustamos lo que haga falta. Así el día de la boda todo va sobre seguro.</p></details>
@@ -506,11 +583,12 @@ footer a{color:#D9A37A}
 </section>
 
 <section class="close">
+  <div class="close-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1704621354138-e124277356f2?auto=format&fit=crop&w=1600&q=75" alt="" loading="lazy"></div>
   <div class="wrap rv">
     <img class="big" src="sello-completo.webp" alt="Velvet Contour · Atelier de maquillaje">
-    <h2>Tu experiencia de belleza <em class="metal">empieza aquí.</em></h2>
+    <h2>Tu experiencia de belleza <em>empieza aquí.</em></h2>
     <p>Indícanos la fecha y los detalles de tu evento. Diseñaremos para ti una propuesta totalmente personalizada y a medida.</p>
-    <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center"><a class="btn btn-copper" href="#cita">Solicitar cita</a><a class="btn btn-ghost" href="https://wa.me/34665788116" target="_blank" rel="noopener"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa-logo"/></svg>Consultar por WhatsApp</a></div>
+    <div class="acts"><a class="btn btn-fill" href="#cita">Solicitar cita</a><a class="btn btn-line" href="https://wa.me/34665788116" target="_blank" rel="noopener"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa-logo"/></svg>Consultar por WhatsApp</a></div>
   </div>
 </section>
 </main>
@@ -518,6 +596,7 @@ footer a{color:#D9A37A}
 <footer>
   <div class="wrap">
     <span>Velvet Contour · Atelier de maquillaje a domicilio</span>
+    <nav class="legal" aria-label="Información legal"><a href="aviso-legal.html">Aviso legal</a><a href="privacidad.html">Privacidad</a><a href="cookies.html">Cookies</a></nav>
     <span>© 2026 KREA Digital Studio · Diseño y desarrollo</span>
   </div>
 </footer>
@@ -526,7 +605,7 @@ footer a{color:#D9A37A}
   <a class="f-cita" href="#cita" aria-label="Pide tu cita"><svg class="cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M9 14.5l2 2 4-4"/></svg></a>
   <a class="f-wa" href="https://wa.me/34665788116" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa-logo"/></svg></a>
 </div>
-
+<script>window.TIMG=["https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1000&q=75","https://images.unsplash.com/photo-1677001458801-5dd67e594b77?auto=format&fit=crop&w=1000&q=75","https://images.unsplash.com/photo-1677001458909-76d7d788b004?auto=format&fit=crop&w=1000&q=75","https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=1000&q=75","https://images.unsplash.com/photo-1636023730877-233b9237d4ec?auto=format&fit=crop&w=1000&q=75"];</script>
 <script>
 (function(){
 
@@ -602,6 +681,7 @@ footer a{color:#D9A37A}
     document.getElementById('tText').textContent=techs[i][1];
     var c=document.getElementById('tChips'); c.textContent='';
     techs[i][2].forEach(function(x){ var s=document.createElement('span'); s.textContent=x; c.appendChild(s); });
+    var im=document.getElementById('tImg'); if(im && window.TIMG){ im.classList.remove('in'); im.src=TIMG[i]; im.onload=function(){ im.classList.add('in'); }; }
   }
   tabs.forEach(function(t,i){
     t.addEventListener('click', function(){ showTech(i); });
@@ -616,6 +696,7 @@ footer a{color:#D9A37A}
     var name=document.getElementById('fName').value.trim(), date=document.getElementById('fDate').value, place=document.getElementById('fPlace').value.trim();
     var err=document.getElementById('fErr');
     if(!name||!date||!place){ err.textContent='Añade tu nombre, la fecha y la localidad para preparar el mensaje.'; return; }
+    if(!document.getElementById('fOk').checked){ err.textContent='Marca la casilla de privacidad para continuar.'; return; }
     err.textContent='';
     var d=date.split('-'); var fecha=d[2]+'/'+d[1]+'/'+d[0];
     var msg='Hola, Velvet Contour. Soy '+name+'.\nServicio: '+document.getElementById('fSvc').value+'\nFecha: '+fecha+'\nLocalidad: '+place+'\nPersonas: '+document.getElementById('fPeople').value+'\nEstilo: '+document.getElementById('fStyle').value;
@@ -631,5 +712,6 @@ footer a{color:#D9A37A}
     try{ navigator.clipboard.writeText(t).then(done, fallback); }catch(_){ fallback(); }
   });
 })();
-</script>
-
+</script><script>document.querySelectorAll('img').forEach(function(i){i.addEventListener('error',function(){i.style.visibility='hidden'}); if(i.closest('.ph-img')){ var d=function(){i.classList.add('ld')}; if(i.complete&&i.naturalWidth) d(); else i.addEventListener('load',d);} }); setTimeout(function(){document.querySelectorAll('.ph-img img').forEach(function(i){i.classList.add('ld')})},1800); document.documentElement.classList.add('js');</script>
+</body>
+</html>
