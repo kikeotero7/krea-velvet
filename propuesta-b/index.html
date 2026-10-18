@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Velvet Contour</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Velvet Contour · Atelier de maquillaje a domicilio para novias, invitadas, madrinas y eventos.">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap">
+<style>
+/* Propuesta B · editorial con arcos. Oscura completa por defecto, clara completa con data-look="clara". */
+:root{
+  --bg:#130C09; --bg-2:#1B120E; --surface:#221712; --ink:#F3E8DC; --muted:#BDA797; --faint:#8E7666;
+  --line:rgba(227,165,116,.16); --accent:#DE9A66; --accent-2:#B8693A; --on-accent:#1A0F0B;
+  --veil:rgba(19,12,9,.72); --shadow:0 30px 60px -34px rgba(0,0,0,.75);
+  --display:'Cormorant Garamond', Georgia, serif; --body:'Montserrat', 'Helvetica Neue', sans-serif;
+  --g:max(18px, env(safe-area-inset-left,0px)); --gr:max(18px, env(safe-area-inset-right,0px));
+  color-scheme:dark;
+}
+:root[data-look="clara"]{
+  --bg:#F7F0E7; --bg-2:#EFE4D7; --surface:#FFFCF8; --ink:#2A1A13; --muted:#6C5246; --faint:#9C8172;
+  --line:#E3D2C1; --accent:#9C4E26; --accent-2:#7E3A1A; --on-accent:#FFF8F1;
+  --veil:rgba(247,240,231,.74); --shadow:0 30px 60px -36px rgba(74,40,24,.45);
+  color-scheme:light;
+}
+[hidden]{display:none!important}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg); color:var(--ink); font-family:var(--body); font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased; transition:background .4s ease, color .4s ease}
+img{display:block; max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:6px}
+.wrap{max-width:1200px; margin:0 auto; padding-left:var(--g); padding-right:var(--gr)}
+h1,h2,h3{font-family:var(--display); font-weight:300; line-height:.98; letter-spacing:-.01em; text-wrap:balance}
+h2{font-size:clamp(2.7rem, 5.6vw, 4.6rem)}
+h2 em, h1 em{font-style:italic; font-weight:400; color:var(--accent)}
+.label{font-size:.72rem; letter-spacing:.28em; text-transform:uppercase; color:var(--accent); font-weight:500}
+.lead{color:var(--muted); font-size:1.05rem; max-width:52ch}
+section{padding-block:clamp(84px, 11vw, 150px)}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:50px; padding:0 28px; border-radius:999px; font:600 .76rem/1 var(--body); letter-spacing:.2em; text-transform:uppercase; text-decoration:none; border:1px solid transparent; cursor:pointer; transition:transform .25s ease, background .25s ease, color .25s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn-fill{background:linear-gradient(100deg,#B5602F,#E3A574 55%,#C46F3A); color:#1F110C}
+.btn-line{border-color:color-mix(in srgb, var(--accent) 55%, transparent); color:var(--ink); background:transparent}
+.btn-line:hover{background:color-mix(in srgb, var(--accent) 12%, transparent)}
+
+/* Foto: tono cobre común a todas */
+.ph-img{position:relative; overflow:hidden; background:linear-gradient(160deg,#3A241A,#1B110D)}
+:root[data-look="clara"] .ph-img{background:linear-gradient(160deg,#E9D6C4,#D7BBA3)}
+.ph-img img{width:100%; height:100%; object-fit:cover; filter:sepia(.22) saturate(.9) contrast(1.04) brightness(.96); transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.ph-img::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(184,105,58,.10), rgba(60,30,18,.28)); mix-blend-mode:multiply; pointer-events:none}
+.arch{border-radius:999px 999px 26px 26px}
+
+/* Cabecera */
+.top{position:fixed; inset:0 0 auto; z-index:40; padding-top:env(safe-area-inset-top,0px); transition:background .35s ease, box-shadow .35s ease}
+.top.solid{background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); box-shadow:0 1px 0 var(--line)}
+.top .wrap{display:flex; align-items:center; justify-content:space-between; height:76px; gap:16px}
+.brand{display:flex; align-items:center; gap:12px; text-decoration:none}
+.brand img{width:44px; height:44px}
+.brand span{font-family:var(--display); font-size:1.45rem; letter-spacing:.05em; white-space:nowrap}
+.nav{display:flex; align-items:center; gap:26px}
+.nav a.link{text-decoration:none; font-size:.72rem; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); white-space:nowrap}
+.nav a.link:hover{color:var(--accent)}
+.nav .btn{min-height:42px; padding:0 20px}
+.look{display:inline-flex; padding:3px; border-radius:999px; border:1px solid var(--line); gap:2px}
+.look button{appearance:none; border:0; background:transparent; color:var(--ink); min-height:36px; min-width:38px; padding:0 10px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer}
+.look button[aria-pressed="true"]{background:var(--accent); color:var(--on-accent)}
+.look svg{width:16px; height:16px}
+.look .txt{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+.burger{display:none; width:46px; height:46px; border:1px solid var(--line); border-radius:50%; background:transparent; color:var(--ink); cursor:pointer; align-items:center; justify-content:center}
+.menu{position:fixed; inset:0; z-index:60; background:var(--bg); display:flex; flex-direction:column; padding:calc(22px + env(safe-area-inset-top,0px)) var(--gr) calc(30px + env(safe-area-inset-bottom,0px)) var(--g)}
+.menu-head{display:flex; justify-content:space-between; align-items:center}
+.menu nav{display:flex; flex-direction:column; gap:12px; margin-top:44px}
+.menu nav a{font-family:var(--display); font-size:2.1rem; text-decoration:none}
+.menu .btn{margin-top:auto}
+@media (max-width:1100px){ .nav a.link, .nav .btn{display:none} .burger{display:inline-flex} }
+@media (max-width:480px){ .brand span{font-size:1.15rem} .brand img{width:36px; height:36px} .nav{gap:10px} }
+
+/* Portada */
+.hero{position:relative; padding-top:calc(130px + env(safe-area-inset-top,0px)); padding-bottom:70px; overflow:hidden}
+.hero::before{content:""; position:absolute; width:900px; height:900px; right:-260px; top:-200px; border-radius:50%; background:radial-gradient(circle, color-mix(in srgb, var(--accent-2) 26%, transparent), transparent 62%); pointer-events:none}
+.hero .wrap{position:relative; display:grid; grid-template-columns:1.05fr .95fr; gap:64px; align-items:center}
+.hero .mark{width:86px; margin-bottom:28px}
+.hero h1{font-size:clamp(3.4rem, 7.6vw, 6.8rem)}
+.hero h1 em{display:block}
+.hero p{color:var(--muted); font-size:1.07rem; max-width:46ch; margin:30px 0 38px}
+.hero .actions{display:flex; flex-wrap:wrap; gap:14px}
+.hero .tags{display:flex; flex-wrap:wrap; gap:8px 26px; margin-top:44px; font-size:.72rem; letter-spacing:.24em; color:var(--faint)}
+.hero .tags .t-up{text-transform:uppercase}
+.hero .tags .handle{letter-spacing:.05em; font-size:.86rem}
+.hero-art{position:relative; justify-self:end; width:min(100%, 480px)}
+.hero-art .ph-img{aspect-ratio:4/5.4; box-shadow:var(--shadow)}
+.hero-art .ph-img img{animation:slowzoom 18s ease-in-out infinite alternate}
+@keyframes slowzoom{to{transform:scale(1.07)}}
+.hero-art .chip{position:absolute; left:-34px; bottom:44px; background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid var(--line); border-radius:18px; padding:16px 20px; max-width:230px}
+.hero-art .chip b{display:block; font-family:var(--display); font-weight:400; font-size:1.35rem; line-height:1.1}
+.hero-art .chip span{font-size:.78rem; color:var(--muted)}
+.hero-art .ring{position:absolute; inset:-16px -16px auto auto; width:120px; height:120px; border-radius:50%; border:1px solid color-mix(in srgb, var(--accent) 45%, transparent)}
+.reveal > *{animation:rise 1s cubic-bezier(.2,.7,.2,1) both}
+.reveal > *:nth-child(2){animation-delay:.1s} .reveal > *:nth-child(3){animation-delay:.2s} .reveal > *:nth-child(4){animation-delay:.3s} .reveal > *:nth-child(5){animation-delay:.4s} .reveal > *:nth-child(6){animation-delay:.5s}
+@keyframes rise{from{opacity:.001; transform:translateY(22px)}}
+@media (max-width:900px){
+  .hero{padding-top:calc(96px + env(safe-area-inset-top,0px))}
+  .hero .wrap{grid-template-columns:1fr; gap:44px}
+  .hero-art{justify-self:center; width:min(86%, 380px); order:-1}
+  .hero-art .chip{left:-14px; bottom:26px; padding:12px 16px}
+  .hero .mark{width:64px; margin-bottom:20px}
+}
+
+/* Banda */
+.band{border-block:1px solid var(--line); overflow:hidden; background:var(--bg-2)}
+.band-track{display:flex; gap:48px; padding-block:20px; width:max-content; animation:slide 36s linear infinite; font-family:var(--display); font-style:italic; font-size:1.55rem; color:var(--accent); white-space:nowrap}
+.band-track span::after{content:"✦"; font-style:normal; font-size:.75rem; margin-left:48px; color:var(--faint); vertical-align:middle}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* Cómo trabajamos */
+.how{display:grid; grid-template-columns:.8fr 1.2fr; gap:72px; align-items:center}
+.how .ph-img{aspect-ratio:3/4; box-shadow:var(--shadow)}
+.how h2{margin:18px 0 18px}
+.steps{list-style:none; margin-top:44px; display:grid; gap:0}
+.step{display:grid; grid-template-columns:76px 1fr; gap:22px; padding:28px 0; border-top:1px solid var(--line)}
+.step:last-child{border-bottom:1px solid var(--line)}
+.step .n{font-family:var(--display); font-style:italic; font-size:3.2rem; line-height:.9; color:var(--accent)}
+.step h3{font-size:1.85rem; font-weight:400}
+.step p{color:var(--muted); margin-top:8px; max-width:56ch}
+@media (max-width:900px){ .how{grid-template-columns:1fr; gap:44px} .how .ph-img{aspect-ratio:4/3.4; max-width:520px} .step{grid-template-columns:54px 1fr} .step .n{font-size:2.4rem} }
+
+/* Servicios */
+.services{background:var(--bg-2)}
+.s-head{display:flex; justify-content:space-between; align-items:end; gap:32px; flex-wrap:wrap; margin-bottom:56px}
+.s-head h2{margin-top:16px}
+.svc-grid{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:22px}
+.svc{display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--line); border-radius:999px 999px 24px 24px; overflow:hidden; min-width:0}
+.svc .ph-img{aspect-ratio:1/1.05; border-radius:999px 999px 0 0}
+.svc-body{padding:24px 22px 24px; display:flex; flex-direction:column; gap:12px; flex:1}
+.card-tag{font-size:.66rem; letter-spacing:.28em; text-transform:uppercase; color:var(--faint)}
+.svc h3{font-size:2rem; font-weight:400}
+.svc .when{font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--accent)}
+.svc p{color:var(--muted); font-size:.92rem}
+.svc ul{list-style:none; display:flex; flex-wrap:wrap; gap:6px}
+.svc li{font-size:.72rem; padding:5px 11px; border-radius:999px; border:1px solid var(--line)}
+.svc .foot{margin-top:auto; padding-top:10px; display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap}
+.svc .price{font-size:.8rem; color:var(--muted)}
+.svc .price strong{font-family:var(--display); font-weight:400; font-size:1.3rem; color:var(--ink)}
+.svc .btn{min-height:42px; padding:0 18px}
+@media (max-width:1100px){ .svc-grid{grid-template-columns:repeat(2, minmax(0,1fr))} }
+@media (max-width:640px){ .svc-grid{grid-template-columns:1fr} .svc{border-radius:200px 200px 22px 22px} .svc .ph-img{aspect-ratio:1/.85} }
+
+/* Orientador */
+.quiz{position:relative; overflow:hidden}
+.quiz-bg{position:absolute; inset:0 0 0 auto; width:52%; pointer-events:none; -webkit-mask-image:linear-gradient(90deg, transparent, #000 55%); mask-image:linear-gradient(90deg, transparent, #000 55%)}
+.quiz-bg img{width:100%; height:100%; object-fit:cover; opacity:.42; filter:sepia(.3) saturate(.9)}
+:root[data-look="clara"] .quiz-bg img{opacity:.5; mix-blend-mode:multiply}
+.quiz .wrap{position:relative; display:grid; grid-template-columns:1fr .9fr; gap:56px; align-items:start}
+.quiz h2{margin:16px 0 16px}
+.q{border:0; margin:0 0 26px}
+.q legend{font-family:var(--display); font-size:1.65rem; margin-bottom:12px}
+.opts{display:flex; flex-wrap:wrap; gap:10px}
+.opts label{position:relative}
+.opts input{position:absolute; opacity:0; inset:0}
+.opts span{display:inline-flex; min-height:44px; align-items:center; padding:0 18px; border:1px solid var(--line); border-radius:999px; font-size:.86rem; cursor:pointer; background:color-mix(in srgb, var(--surface) 55%, transparent); transition:background .2s ease, color .2s ease}
+.opts input:checked + span{background:var(--accent); color:var(--on-accent); border-color:var(--accent)}
+.opts input:focus-visible + span{outline:2px solid var(--accent); outline-offset:3px}
+.result{position:sticky; top:104px; border:1px solid var(--line); border-radius:999px 999px 26px 26px; padding:76px 34px 34px; text-align:center; background:color-mix(in srgb, var(--surface) 72%, transparent); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); display:flex; flex-direction:column; align-items:center; gap:14px}
+.result .mk{width:58px; opacity:.9}
+.result h3{font-size:2.4rem; font-weight:400}
+.result p{color:var(--muted); margin:0; max-width:40ch}
+#rWhen{color:var(--accent)}
+@media (max-width:900px){ .quiz .wrap{grid-template-columns:1fr} .result{position:static; border-radius:200px 200px 24px 24px; padding-top:64px} .quiz-bg{width:100%; height:45%; top:auto; -webkit-mask-image:linear-gradient(180deg, transparent, #000 60%); mask-image:linear-gradient(180deg, transparent, #000 60%)} }
+
+/* Técnicas */
+.tech-grid{display:grid; grid-template-columns:.95fr 1.05fr; gap:64px; align-items:center; margin-top:56px}
+.tabs{display:flex; flex-direction:column}
+.tab{appearance:none; background:none; border:0; border-bottom:1px solid var(--line); color:var(--faint); text-align:left; padding:18px 0; font-family:var(--display); font-size:1.9rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:color .2s ease, padding .3s ease}
+.tab:hover{color:var(--muted)}
+.tab[aria-selected="true"]{color:var(--ink); padding-left:12px}
+.tab[aria-selected="true"]::after{content:""; width:34px; height:1px; background:var(--accent)}
+.panel{position:relative; display:grid; grid-template-columns:1fr; border-radius:26px; overflow:hidden; background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow)}
+.panel .ph-img{aspect-ratio:16/10}
+.panel .ph-img img{opacity:0; transition:opacity .6s ease}
+.panel .ph-img img.in{opacity:1}
+.panel-body{padding:28px 30px 32px; display:flex; flex-direction:column; gap:12px}
+.panel h3{font-size:2.2rem; font-weight:400}
+.panel p{color:var(--muted); margin:0}
+.chips{display:flex; flex-wrap:wrap; gap:8px}
+.chips span{font-size:.74rem; padding:6px 12px; border-radius:999px; border:1px solid var(--line)}
+@media (max-width:900px){ .tech-grid{grid-template-columns:1fr; gap:30px} .tab{font-size:1.6rem} }
+
+/* Trabajos */
+.works{background:var(--bg-2)}
+.gallery{display:grid; grid-template-columns:repeat(12, 1fr); gap:18px; margin-top:56px}
+.g{position:relative; grid-column:span 4}
+.g .ph-img{aspect-ratio:4/5; border-radius:22px}
+.g:nth-child(1) .ph-img, .g:nth-child(5) .ph-img{border-radius:999px 999px 22px 22px}
+.g:nth-child(2){transform:translateY(42px)} .g:nth-child(5){transform:translateY(42px)}
+.g figcaption{position:absolute; left:16px; bottom:16px; font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:#F3E8DC; background:rgba(19,12,9,.55); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); padding:7px 12px; border-radius:999px}
+@media (max-width:760px){ .g{grid-column:span 6} .g:nth-child(n){transform:none} .gallery{gap:12px} }
+
+/* Cita */
+.book-grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:64px}
+.book h2{margin:16px 0 18px}
+form{display:grid; grid-template-columns:1fr 1fr; gap:16px; background:var(--surface); border:1px solid var(--line); border-radius:28px; padding:30px}
+.field{display:flex; flex-direction:column; gap:6px; min-width:0}
+.field.full{grid-column:1/-1}
+.field label{font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--muted)}
+.field input, .field select, .field textarea{font:inherit; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:14px; min-height:50px; padding:12px 16px; width:100%}
+.field textarea{min-height:110px; resize:vertical}
+.err{color:#D9534F; font-size:.82rem; min-height:1.2em; grid-column:1/-1}
+.prepared{grid-column:1/-1; border:1px solid var(--line); border-radius:18px; padding:20px; display:flex; flex-direction:column; gap:12px; background:var(--bg)}
+.prepared pre{white-space:pre-wrap; font:inherit}
+.prepared .acts{display:flex; flex-wrap:wrap; gap:10px}
+.contact-list{display:flex; flex-direction:column; margin-top:30px}
+.contact-list div{display:flex; flex-direction:column; gap:2px; border-top:1px solid var(--line); padding:16px 0}
+.contact-list small{font-size:.66rem; letter-spacing:.24em; text-transform:uppercase; color:var(--faint)}
+.contact-list span, .contact-list a{font-family:var(--display); font-size:1.55rem; text-decoration:none}
+.wa{width:22px; height:22px; flex:none}
+.wa-row{display:flex; align-items:center; gap:10px}
+@media (max-width:900px){ .book-grid{grid-template-columns:1fr; gap:36px} form{grid-template-columns:1fr; padding:22px} }
+
+/* FAQ */
+.faq{max-width:860px}
+.faq h2{margin:16px 0 34px}
+details{border-top:1px solid var(--line); padding-block:22px}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer; list-style:none; font-family:var(--display); font-size:1.65rem; display:flex; justify-content:space-between; gap:16px; align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+"; font-family:var(--body); font-weight:300; font-size:1.5rem; color:var(--accent); transition:transform .25s ease}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--muted); margin-top:12px; max-width:64ch}
+
+/* Cierre */
+.close{position:relative; overflow:hidden; text-align:center; padding-block:clamp(110px, 14vw, 190px)}
+.close-bg{position:absolute; inset:0}
+.close-bg img{width:100%; height:100%; object-fit:cover; opacity:.55; filter:sepia(.25) saturate(.95); -webkit-mask-image:radial-gradient(ellipse 70% 80% at 50% 50%, #000 25%, transparent 78%); mask-image:radial-gradient(ellipse 70% 80% at 50% 50%, #000 25%, transparent 78%)}
+:root[data-look="clara"] .close-bg img{opacity:.6; mix-blend-mode:multiply}
+.close::after{content:""; position:absolute; inset:0; background:radial-gradient(ellipse 42% 46% at 50% 52%, var(--veil), transparent 100%)}
+.close .wrap{position:relative; z-index:1}
+.close .big{width:min(190px, 46%); margin:0 auto 26px}
+.close h2{font-size:clamp(2.8rem, 6.6vw, 5.4rem)}
+.close p{color:var(--muted); max-width:46ch; margin:20px auto 34px}
+.close .acts{display:flex; flex-wrap:wrap; gap:14px; justify-content:center}
+footer{border-top:1px solid var(--line); padding-block:28px calc(28px + env(safe-area-inset-bottom,0px)); font-size:.74rem; color:var(--faint)}
+footer .wrap{display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center}
+
+/* Botones flotantes */
+.fab{position:fixed; z-index:45; left:max(14px, calc(env(safe-area-inset-left,0px) + 10px)); bottom:calc(18px + env(safe-area-inset-bottom,0px)); display:flex; flex-direction:column; gap:10px; opacity:0; transform:translateY(12px); pointer-events:none; transition:opacity .35s ease, transform .35s ease}
+.fab.on{opacity:1; transform:none; pointer-events:auto}
+.fab a{width:52px; height:52px; border-radius:50%; display:grid; place-items:center; box-shadow:0 8px 22px rgba(0,0,0,.3)}
+.fab .f-cita{background:linear-gradient(135deg,#B5602F,#E3A574 60%,#C46F3A); color:#1F110C}
+.fab .f-wa{background:var(--surface); border:1px solid var(--line)}
+.fab .f-wa .wa{width:28px; height:28px}
+.fab svg.cal{width:22px; height:22px}
+
+/* Aparición */
+.rv{transition:transform .9s cubic-bezier(.2,.7,.2,1), opacity .9s ease}
+.rv.pre{opacity:.2; transform:translateY(26px)}
+@media (prefers-reduced-motion: reduce){ *,*::before,*::after{animation:none!important; transition:none!important} .rv.pre{opacity:1; transform:none} html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="wa-logo" viewBox="0 0 24 24"><path fill="#25D366" d="M12 1.6a10.3 10.3 0 0 0-8.9 15.5L1.7 22.4l5.4-1.4A10.3 10.3 0 1 0 12 1.6z"/><path fill="#FFFFFF" d="M8.3 6.6c.3-.3.8-.3 1 .1l1.2 1.9c.2.3.2.8-.1 1.1l-.7.7c.7 1.5 1.9 2.7 3.4 3.4l.7-.7c.3-.3.8-.3 1.1-.1l1.9 1.2c.4.2.4.7.1 1l-.9.9c-.6.6-1.5.8-2.3.5-2.9-1.1-5.2-3.4-6.3-6.3-.3-.8-.1-1.7.5-2.3z"/></symbol></svg>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio"><img src="sello-sin-texto.webp" alt=""><span>Velvet Contour</span></a>
+    <nav class="nav" aria-label="Principal">
+      <a class="link" href="#como">Cómo trabajamos</a>
+      <a class="link" href="#servicios">Servicios</a>
+      <a class="link" href="#tecnicas">Técnicas</a>
+      <a class="link" href="#trabajos">Trabajos</a>
+      <a class="btn btn-fill" href="#cita">Pide cita</a>
+      <div class="look" role="group" aria-label="Versión de la web">
+        <button type="button" data-look="oscura" aria-pressed="true" aria-label="Versión oscura"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><span class="txt">Oscura</span></button>
+        <button type="button" data-look="clara" aria-pressed="false" aria-label="Versión clara"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg><span class="txt">Clara</span></button>
+      </div>
+      <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+    </nav>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <div class="menu-head">
+    <a class="brand" href="#inicio" data-close><img src="sello-sin-texto.webp" alt=""><span>Velvet Contour</span></a>
+    <button class="burger" style="display:inline-flex" id="menuClose" aria-label="Cerrar menú"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <nav aria-label="Menú móvil">
+    <a href="#como" data-close>Cómo trabajamos</a>
+    <a href="#servicios" data-close>Servicios</a>
+    <a href="#orientador" data-close>Descubre tu estilo</a>
+    <a href="#tecnicas" data-close>Técnicas</a>
+    <a href="#trabajos" data-close>Trabajos</a>
+    <a href="#preguntas" data-close>Preguntas</a>
+  </nav>
+  <a class="btn btn-fill" href="#cita" data-close>Reserva tu cita</a>
+</div>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="reveal">
+      <img class="mark" src="sello-sin-texto.webp" alt="Sello de Velvet Contour">
+      <span class="label">Atelier de maquillaje a domicilio</span>
+      <h1 style="margin-top:20px">El estudio de belleza <em>que va contigo.</em></h1>
+      <p>Especialistas en novias, madrinas, invitadas y eventos. Preparamos tu piel y diseñamos un estilismo a medida en la tranquilidad de tu hogar, garantizando un acabado impecable y duradero para tu gran día.</p>
+      <div class="actions">
+        <a class="btn btn-fill" href="#cita">Reserva tu cita</a>
+        <a class="btn btn-line" href="#orientador">Descubre tu estilo</a>
+      </div>
+      <div class="tags"><span class="t-up">Agenda abierta</span><span class="handle">@velvetcontour.beauty</span></div>
+    </div>
+    <div class="hero-art">
+      <div class="ring" aria-hidden="true"></div>
+      <div class="ph-img arch"><img src="https://images.unsplash.com/photo-1773688189414-7637b9b138e1?auto=format&fit=crop&w=1100&q=75" alt="Maquilladora aplicando colorete con brocha" fetchpriority="high"></div>
+      <div class="chip"><b>A domicilio</b><span>Novias · invitadas · madrinas · eventos</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="band" aria-hidden="true">
+  <div class="band-track">
+    <span>Novias</span><span>Invitadas</span><span>Madrinas</span><span>Eventos</span><span>Sesiones de fotos</span><span>A domicilio</span>
+    <span>Novias</span><span>Invitadas</span><span>Madrinas</span><span>Eventos</span><span>Sesiones de fotos</span><span>A domicilio</span>
+  </div>
+</div>
+
+<section id="como">
+  <div class="wrap how">
+    <div class="ph-img arch rv"><img src="https://images.unsplash.com/photo-1764269719546-afc8567db7c6?auto=format&fit=crop&w=900&q=75" alt="Kit profesional de maquillaje sobre un tocador" loading="lazy"></div>
+    <div>
+      <div class="rv">
+        <span class="label">Cómo trabajamos</span>
+        <h2>El cuidado reside <em>en los detalles.</em></h2>
+        <p class="lead">Un proceso exclusivo en tres pasos, desde tu primera consulta hasta el retoque final de tu evento.</p>
+      </div>
+      <ol class="steps">
+        <li class="step rv"><span class="n">1</span><div><h3>Asesoramiento inicial</h3><p>Compartes con nosotras la fecha, ubicación, estilismo y el concepto que deseas. A partir de ahí, elaboramos una propuesta personalizada con un presupuesto cerrado.</p></div></li>
+        <li class="step rv"><span class="n">2</span><div><h3>Diseño de tu estilismo</h3><p>Definimos tonalidades, intensidad y acabados adaptados a tus facciones. Para novias, realizamos una prueba previa garantizando absoluta tranquilidad e impecabilidad en tu día.</p></div></li>
+        <li class="step rv"><span class="n">3</span><div><h3>Experiencia a domicilio</h3><p>Nos desplazamos con todo el equipamiento profesional necesario y productos de alta gama, bajo máximas garantías de higiene y cuidado facial. Preparamos tu piel y realizamos el servicio de maquillaje con total dedicación y serenidad. También ofrecemos atención a acompañantes (madres, hermanas o invitadas).</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="servicios">
+  <div class="wrap">
+    <div class="s-head rv">
+      <div><span class="label">Servicios</span><h2>Un look para <em>cada ocasión.</em></h2></div>
+      <p class="lead">Todos los servicios son a domicilio. El desplazamiento se incluye en el presupuesto según la zona.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc rv">
+        <div class="ph-img"><img src="https://images.unsplash.com/photo-1774814304885-bb5cc796a6c3?auto=format&fit=crop&w=700&q=75" alt="Novia maquillándose antes de la ceremonia" loading="lazy"></div>
+        <div class="svc-body">
+          <span class="card-tag">1. Tarjeta</span>
+          <h3>Novias</h3><span class="when">Con prueba</span>
+          <p>Prueba previa para definir un estilismo impecable. Diseñado para garantizar máxima durabilidad y perfección desde la ceremonia hasta el baile.</p>
+          <ul><li>Natural</li><li>Tendencia</li><li>Glam</li><li>Atrevida</li></ul>
+          <div class="foot"><span class="price">Precio <strong>[a confirmar]</strong></span><a class="btn btn-line" href="#cita" data-svc="Maquillaje de novia">Reservar</a></div>
+        </div>
+      </article>
+      <article class="svc rv">
+        <div class="ph-img"><img src="https://images.unsplash.com/photo-1638628064365-f08ad0ec8245?auto=format&fit=crop&w=700&q=75" alt="Maquilladora trabajando el maquillaje de una invitada" loading="lazy"></div>
+        <div class="svc-body">
+          <span class="card-tag">2. Tarjeta</span>
+          <h3>Invitadas</h3><span class="when">Bodas y fiestas</span>
+          <p>Desde acabados naturales y luminosos hasta ahumados sofisticados. Un diseño adaptado a tu estilismo, al horario del evento y a tu personalidad.</p>
+          <ul><li>Ahumados</li><li>Delineados</li><li>Piel luminosa</li></ul>
+          <div class="foot"><span class="price">Precio <strong>[a confirmar]</strong></span><a class="btn btn-line" href="#cita" data-svc="Maquillaje de invitada">Reservar</a></div>
+        </div>
+      </article>
+      <article class="svc rv">
+        <div class="ph-img"><img src="https://images.unsplash.com/photo-1779675257929-ae3dbf2ad924?auto=format&fit=crop&w=700&q=75" alt="Retrato elegante con velo de tul" loading="lazy"></div>
+        <div class="svc-body">
+          <span class="card-tag">3. Tarjeta</span>
+          <h3>Madrinas</h3><span class="when">Prueba opcional</span>
+          <p>Elegancia y equilibrio: preparación de piel madura, mirada definida con difuminados suaves y tonos en perfecta armonía.</p>
+          <ul><li>Piel madura</li><li>Mirada suave</li><li>Larga duración</li></ul>
+          <div class="foot"><span class="price">Precio <strong>[a confirmar]</strong></span><a class="btn btn-line" href="#cita" data-svc="Maquillaje de madrina">Reservar</a></div>
+        </div>
+      </article>
+      <article class="svc rv">
+        <div class="ph-img"><img src="https://images.unsplash.com/photo-1780504542525-4ec8e46a8d01?auto=format&fit=crop&w=700&q=75" alt="Aplicación de sombra de ojos para una sesión de fotos" loading="lazy"></div>
+        <div class="svc-body">
+          <span class="card-tag">4. Tarjeta</span>
+          <h3>Eventos y fotografía</h3><span class="when">Luz y cámara</span>
+          <p>Graduaciones, celebraciones especiales o sesiones fotográficas. Un maquillaje de alta definición diseñado para lucir impecable y favorecedor tanto al natural como ante la cámara.</p>
+          <ul><li>Fotografía</li><li>Celebraciones</li><li>Grupos</li></ul>
+          <div class="foot"><span class="price">Precio <strong>[a confirmar]</strong></span><a class="btn btn-line" href="#cita" data-svc="Evento o sesión de fotos">Reservar</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="quiz" id="orientador">
+  <div class="quiz-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1677001458966-de3f79363c12?auto=format&fit=crop&w=1100&q=75" alt="" loading="lazy"></div>
+  <div class="wrap">
+    <div>
+      <div class="rv" style="margin-bottom:36px">
+        <span class="label">Orientador</span>
+        <h2>¿Cuál es tu <em>estilo ideal?</em></h2>
+        <p class="lead">Responde a tres breves preguntas y te propondremos la opción perfecta para ti.</p>
+      </div>
+      <fieldset class="q"><legend>¿Para qué ocasión?</legend>
+        <div class="opts">
+          <label><input type="radio" name="oc" value="novia" checked><span>Mi boda</span></label>
+          <label><input type="radio" name="oc" value="invitada"><span>Soy invitada</span></label>
+          <label><input type="radio" name="oc" value="madrina"><span>Soy madrina</span></label>
+          <label><input type="radio" name="oc" value="evento"><span>Evento o fotos</span></label>
+        </div></fieldset>
+      <fieldset class="q"><legend>¿Qué estilo o acabado prefieres?</legend>
+        <div class="opts">
+          <label><input type="radio" name="st" value="natural" checked><span>Natural y luminosa</span></label>
+          <label><input type="radio" name="st" value="elegante"><span>Suave y elegante</span></label>
+          <label><input type="radio" name="st" value="glam"><span>Glamour y ahumado</span></label>
+          <label><input type="radio" name="st" value="atrevida"><span>Sofisticada y audaz</span></label>
+        </div></fieldset>
+      <fieldset class="q"><legend>¿Cuándo es?</legend>
+        <div class="opts">
+          <label><input type="radio" name="wh" value="mes"><span>Este mes</span></label>
+          <label><input type="radio" name="wh" value="pronto" checked><span>De 1 a 6 meses</span></label>
+          <label><input type="radio" name="wh" value="lejos"><span>Más adelante</span></label>
+        </div></fieldset>
+    </div>
+    <div class="result rv" aria-live="polite">
+      <img class="mk" src="sello-sin-texto.webp" alt="">
+      <span class="label">Tu propuesta</span>
+      <h3 id="rTitle">Novia natural luminosa</h3>
+      <p id="rText"></p>
+      <p id="rWhen"></p>
+      <a class="btn btn-fill" href="#cita" id="rBtn" style="margin-top:8px">Pedir esta propuesta</a>
+    </div>
+  </div>
+</section>
+
+<section id="tecnicas">
+  <div class="wrap">
+    <div class="rv">
+      <span class="label">Técnicas</span>
+      <h2 style="margin-top:16px">El lenguaje <em>del maquillaje.</em></h2>
+      <p class="lead" style="margin-top:16px">Las técnicas que dominamos y seguimos perfeccionando. Esta sección crece con cada curso.</p>
+    </div>
+    <div class="tech-grid">
+      <div class="tabs" role="tablist" aria-label="Técnicas">
+        <button class="tab" role="tab" id="t0" aria-selected="true" aria-controls="tpanel">Piel</button>
+        <button class="tab" role="tab" id="t1" aria-selected="false" aria-controls="tpanel">Ahumados</button>
+        <button class="tab" role="tab" id="t2" aria-selected="false" aria-controls="tpanel">Halo y cut crease</button>
+        <button class="tab" role="tab" id="t3" aria-selected="false" aria-controls="tpanel">Delineados</button>
+        <button class="tab" role="tab" id="t4" aria-selected="false" aria-controls="tpanel">Maquillaje y cámara</button>
+      </div>
+      <div class="panel rv" role="tabpanel" id="tpanel" aria-labelledby="t0">
+        <div class="ph-img"><img id="tImg" class="in" src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1000&q=75" alt="" loading="lazy"></div>
+        <div class="panel-body">
+          <span class="label" id="tNum">Técnica 1 de 5</span>
+          <h3 id="tTitle">Piel</h3>
+          <p id="tText"></p>
+          <div class="chips" id="tChips"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="works" id="trabajos">
+  <div class="wrap">
+    <div class="rv">
+      <span class="label">Trabajos</span>
+      <h2 style="margin-top:16px">Portfolio <em>en construcción.</em></h2>
+      <p class="lead" style="margin-top:16px">Aquí irán las fotos y vídeos de trabajos reales, con la marca de agua de Velvet Contour.</p>
+    </div>
+    <div class="gallery">
+      <figure class="g rv"><div class="ph-img"><img src="https://images.unsplash.com/photo-1774814305111-8298b8cde459?auto=format&fit=crop&w=700&q=75" alt="" loading="lazy"></div><figcaption>Novia · próximamente</figcaption></figure>
+      <figure class="g rv"><div class="ph-img"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=75" alt="" loading="lazy"></div><figcaption>Invitada · próximamente</figcaption></figure>
+      <figure class="g rv"><div class="ph-img"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=700&q=75" alt="" loading="lazy"></div><figcaption>Antes y después</figcaption></figure>
+      <figure class="g rv"><div class="ph-img"><img src="https://images.unsplash.com/photo-1620464003286-a5b0d79f32c2?auto=format&fit=crop&w=700&q=75" alt="" loading="lazy"></div><figcaption>Madrina · próximamente</figcaption></figure>
+      <figure class="g rv"><div class="ph-img"><img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=700&q=75" alt="" loading="lazy"></div><figcaption>Sesión de fotos</figcaption></figure>
+      <figure class="g rv"><div class="ph-img"><img src="https://images.unsplash.com/photo-1764333746618-6285bf70db23?auto=format&fit=crop&w=700&q=75" alt="" loading="lazy"></div><figcaption>Detrás de cámara</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="book" id="cita">
+  <div class="wrap book-grid">
+    <div class="rv">
+      <span class="label">Pide tu cita</span>
+      <h2>Tu ocasión, <em>tu maquillaje.</em></h2>
+      <p class="lead">Rellena los datos y se prepara el mensaje para enviarlo por WhatsApp. No se envía nada hasta que tú lo decidas.</p>
+      <div class="contact-list">
+        <div><small>WhatsApp</small><span class="wa-row"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa-logo"/></svg><span>+34 665 78 81 16</span></span></div>
+        <div><small>Instagram</small><a href="https://www.instagram.com/velvetcontour.beauty/" target="_blank" rel="noopener">@velvetcontour.beauty</a></div>
+        <div><small>Correo</small><a href="mailto:velvetcontour.beauty@gmail.com">velvetcontour.beauty@gmail.com</a></div>
+      </div>
+    </div>
+    <form id="form" novalidate class="rv">
+      <div class="field"><label for="fName">Nombre</label><input id="fName" name="nombre" autocomplete="given-name" placeholder="Tu nombre"></div>
+      <div class="field"><label for="fSvc">Servicio</label>
+        <select id="fSvc" name="servicio">
+          <option>Maquillaje de novia</option><option>Prueba de novia</option><option>Maquillaje de invitada</option><option>Maquillaje de madrina</option><option>Evento o sesión de fotos</option><option>Necesito orientación</option>
+        </select></div>
+      <div class="field"><label for="fDate">Fecha</label><input id="fDate" name="fecha" type="date"></div>
+      <div class="field"><label for="fPlace">Localidad</label><input id="fPlace" name="localidad" placeholder="Dónde te maquillamos"></div>
+      <div class="field"><label for="fPeople">Personas</label><select id="fPeople" name="personas"><option>Solo yo</option><option>2 personas</option><option>3 o 4 personas</option><option>5 o más</option></select></div>
+      <div class="field"><label for="fStyle">Estilo</label><select id="fStyle" name="estilo"><option>Natural y luminoso</option><option>Suave y elegante</option><option>Glamour y ahumado</option><option>Sofisticado y audaz</option><option>Prefiero que me asesoréis</option></select></div>
+      <div class="field full"><label for="fMsg">Detalles (opcional)</label><textarea id="fMsg" name="detalles" placeholder="Color del vestido, hora de la ceremonia, ideas que te gustan…"></textarea></div>
+      <div class="err" id="fErr" role="alert"></div>
+      <button class="btn btn-fill" type="submit" style="grid-column:1/-1">Preparar mensaje</button>
+      <div class="prepared" id="prepared" hidden>
+        <span class="label">Mensaje preparado</span>
+        <pre id="prepText"></pre>
+        <div class="acts">
+          <a class="btn btn-fill" id="waLink" href="https://wa.me/34665788116" target="_blank" rel="noopener"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa-logo"/></svg>Abrir WhatsApp</a>
+          <button class="btn btn-line" type="button" id="copyBtn">Copiar mensaje</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section id="preguntas" style="padding-top:0">
+  <div class="wrap faq">
+    <div class="rv"><span class="label">Preguntas</span><h2>Antes de <em>reservar.</em></h2></div>
+    <details><summary>¿Hasta dónde te desplazas?</summary><p>Trabajamos a domicilio en [zona por confirmar]. Para otras localidades, cuéntanos dónde es y te decimos el coste del desplazamiento.</p></details>
+    <details><summary>¿Con cuánta antelación reservo?</summary><p>Para bodas, cuanto antes mejor: las fechas de temporada se llenan con meses. Para invitadas y eventos suele bastar con unas semanas.</p></details>
+    <details><summary>¿Cómo funciona la prueba de novia?</summary><p>Quedamos unas semanas antes, probamos el look con tu vestido y peinado en mente y ajustamos lo que haga falta. Así el día de la boda todo va sobre seguro.</p></details>
+    <details><summary>¿Maquillas a varias personas el mismo día?</summary><p>Sí. Novia con madre, hermanas o amigas, o grupos de invitadas. Indica cuántas sois para organizar los tiempos.</p></details>
+  </div>
+</section>
+
+<section class="close">
+  <div class="close-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1704621354138-e124277356f2?auto=format&fit=crop&w=1600&q=75" alt="" loading="lazy"></div>
+  <div class="wrap rv">
+    <img class="big" src="sello-completo.webp" alt="Velvet Contour · Atelier de maquillaje">
+    <h2>Tu experiencia de belleza <em>empieza aquí.</em></h2>
+    <p>Indícanos la fecha y los detalles de tu evento. Diseñaremos para ti una propuesta totalmente personalizada y a medida.</p>
+    <div class="acts"><a class="btn btn-fill" href="#cita">Solicitar cita</a><a class="btn btn-line" href="https://wa.me/34665788116" target="_blank" rel="noopener"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa-logo"/></svg>Consultar por WhatsApp</a></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Velvet Contour · Atelier de maquillaje a domicilio</span>
+    <span>© 2026 KREA Digital Studio · Diseño y desarrollo</span>
+  </div>
+</footer>
+
+<div class="fab" id="fab">
+  <a class="f-cita" href="#cita" aria-label="Pide tu cita"><svg class="cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M9 14.5l2 2 4-4"/></svg></a>
+  <a class="f-wa" href="https://wa.me/34665788116" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa-logo"/></svg></a>
+</div>
+<script>window.TIMG=["https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1000&q=75","https://images.unsplash.com/photo-1677001458801-5dd67e594b77?auto=format&fit=crop&w=1000&q=75","https://images.unsplash.com/photo-1677001458909-76d7d788b004?auto=format&fit=crop&w=1000&q=75","https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=1000&q=75","https://images.unsplash.com/photo-1636023730877-233b9237d4ec?auto=format&fit=crop&w=1000&q=75"];</script>
+<script>
+(function(){
+
+  // Versión clara / oscura
+  var root=document.documentElement, lookBtns=document.querySelectorAll('.look button');
+  function setLook(v, save){
+    if(v==='clara'){ root.setAttribute('data-look','clara'); } else { root.removeAttribute('data-look'); v='oscura'; }
+    lookBtns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-look')===v)); });
+    if(save){ try{ localStorage.setItem('vc-look', v); }catch(_){} }
+  }
+  lookBtns.forEach(function(b){ b.addEventListener('click', function(){ setLook(b.getAttribute('data-look'), true); }); });
+  var saved='oscura'; try{ saved=localStorage.getItem('vc-look')||'oscura'; }catch(_){}
+  setLook(saved, false);
+
+  // Cabecera sólida al hacer scroll
+  var top=document.getElementById('top');
+  var fab=document.getElementById('fab'), hero=document.getElementById('inicio'), closeSec=document.querySelector('.close');
+  function onScroll(){ top.classList.toggle('solid', window.scrollY>40); var nearEnd = window.scrollY + window.innerHeight > closeSec.offsetTop + 120; fab.classList.toggle('on', window.scrollY > hero.offsetHeight*0.6 && !nearEnd); }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // Menú móvil
+  var menu=document.getElementById('menu'), burger=document.getElementById('burger');
+  function setMenu(open){ menu.hidden=!open; burger.setAttribute('aria-expanded', String(open)); document.body.style.overflow=open?'hidden':''; }
+  burger.addEventListener('click', function(){ setMenu(true); });
+  document.getElementById('menuClose').addEventListener('click', function(){ setMenu(false); });
+  menu.querySelectorAll('[data-close]').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+
+  // Aparición al hacer scroll (visible por defecto)
+  if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.remove('pre'); io.unobserve(e.target);} }); },{rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.rv').forEach(function(el){ var r=el.getBoundingClientRect(); if(r.top>window.innerHeight){ el.classList.add('pre'); io.observe(el);} });
+  }
+
+  // Orientador
+  var looks={
+    novia:{natural:['Novia natural luminosa','Piel trabajada y luminosa, mirada definida con tonos cálidos y labios naturales. Incluye prueba previa.'],elegante:['Novia sutil y elegante','Tonos suaves, transiciones limpias y un acabado satinado que aguanta todo el día. Incluye prueba previa.'],glam:['Novia glamour','Semi-ahumado en bronce, mirada intensa y piel pulida para fotos. Incluye prueba previa.'],atrevida:['Novia sofisticada y audaz','Semi cut crease con un toque de color o delineado gráfico. Lo probamos antes para que te veas tú.']},
+    invitada:{natural:['Invitada luminosa','Piel fresca, mirada suave y un colorete que da vida. Ideal para bodas de día.'],elegante:['Invitada elegante','Mirada definida con tonos tierra y labios en armonía con tu vestido.'],glam:['Invitada ahumado bronce','Ahumado en bronce y cobre con piel pulida. Perfecto para bodas de tarde y noche.'],atrevida:['Invitada con color','Halo o delineado gráfico con un color que combine con tu look.']},
+    madrina:{natural:['Madrina natural','Piel cuidada y satinada, mirada suave y labios rosados. Fresco y duradero.'],elegante:['Madrina elegante','Mirada definida con transiciones suaves y labios en armonía. Clásico y favorecedor.'],glam:['Madrina con intensidad','Ahumado suave en tonos cálidos y piel pulida para la celebración.'],atrevida:['Madrina con carácter','Un toque de color en la mirada o en los labios sin perder la elegancia.']},
+    evento:{natural:['Evento natural','Piel luminosa que funciona en persona y en cámara.'],elegante:['Evento elegante','Tonos neutros y acabado mate-satinado pensado para la luz y las fotos.'],glam:['Evento glamour','Ahumado y mirada intensa para una noche especial o una sesión de fotos.'],atrevida:['Look creativo','Color, gráficos y contrastes para fotos, redes o un evento temático.']}
+  };
+  var svcMap={novia:'Maquillaje de novia',invitada:'Maquillaje de invitada',madrina:'Maquillaje de madrina',evento:'Evento o sesión de fotos'};
+  var styleMap={natural:'Natural y luminoso',elegante:'Suave y elegante',glam:'Glamour y ahumado',atrevida:'Sofisticado y audaz'};
+  var whenTxt={mes:'Queda poco: escríbenos hoy para ver la disponibilidad.',pronto:'Buen momento para reservar fecha y hacer la prueba.',lejos:'Reserva tu fecha ya y concretamos los detalles más adelante.'};
+  function val(n){ var el=document.querySelector('input[name="'+n+'"]:checked'); return el?el.value:''; }
+  function updateQuiz(){
+    var oc=val('oc'), st=val('st'), wh=val('wh'), l=looks[oc][st];
+    document.getElementById('rTitle').textContent=l[0];
+    document.getElementById('rText').textContent=l[1];
+    document.getElementById('rWhen').textContent=whenTxt[wh];
+  }
+  document.querySelectorAll('.quiz input').forEach(function(i){ i.addEventListener('change', updateQuiz); });
+  updateQuiz();
+  document.getElementById('rBtn').addEventListener('click', function(){
+    document.getElementById('fSvc').value=svcMap[val('oc')];
+    document.getElementById('fStyle').value=styleMap[val('st')];
+  });
+  document.querySelectorAll('[data-svc]').forEach(function(a){ a.addEventListener('click', function(){ document.getElementById('fSvc').value=a.getAttribute('data-svc'); }); });
+
+  // Técnicas
+  var techs=[
+    ['Piel','La base de todo. Preparación según tu tipo de piel, base ligera o de alta cobertura y acabado luminoso, satinado o mate.',['Preparación','Corrección','Luz y contorno','Fijación']],
+    ['Ahumados','Sombras que se difuminan de más a menos intensidad para dar profundidad a la mirada.',['Suave','Semi-ahumado','Bronce','Negro','Brasileño','Ruso']],
+    ['Halo y cut crease','El halo ilumina el centro del párpado; el cut crease marca la cuenca con contraste para abrir la mirada.',['Halo','Semi cut crease','En pico','Abierto','Gráfico']],
+    ['Delineados','Eyeliner definido, difuminado, doble o conectado con la línea inferior para alargar o enmarcar los ojos.',['Clásico','Difuminado','Doble liner','Conexiones']],
+    ['Maquillaje y cámara','Ajustes para que el maquillaje funcione con flash, luz natural, blanco y negro o vídeo.',['Fotografía','Blanco y negro','Vídeo','Redes']]
+  ];
+  var tabs=document.querySelectorAll('.tab');
+  function showTech(i){
+    tabs.forEach(function(t,k){ t.setAttribute('aria-selected', String(k===i)); t.tabIndex=k===i?0:-1; });
+    document.getElementById('tpanel').setAttribute('aria-labelledby','t'+i);
+    document.getElementById('tNum').textContent='Técnica '+(i+1)+' de '+techs.length;
+    document.getElementById('tTitle').textContent=techs[i][0];
+    document.getElementById('tText').textContent=techs[i][1];
+    var c=document.getElementById('tChips'); c.textContent='';
+    techs[i][2].forEach(function(x){ var s=document.createElement('span'); s.textContent=x; c.appendChild(s); });
+    var im=document.getElementById('tImg'); if(im && window.TIMG){ im.classList.remove('in'); im.src=TIMG[i]; im.onload=function(){ im.classList.add('in'); }; }
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click', function(){ showTech(i); });
+    t.addEventListener('keydown', function(e){ if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); var n=(i+(e.key==='ArrowDown'?1:-1)+tabs.length)%tabs.length; tabs[n].focus(); showTech(n);} });
+  });
+  showTech(0);
+
+  // Formulario de cita
+  var form=document.getElementById('form');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name=document.getElementById('fName').value.trim(), date=document.getElementById('fDate').value, place=document.getElementById('fPlace').value.trim();
+    var err=document.getElementById('fErr');
+    if(!name||!date||!place){ err.textContent='Añade tu nombre, la fecha y la localidad para preparar el mensaje.'; return; }
+    err.textContent='';
+    var d=date.split('-'); var fecha=d[2]+'/'+d[1]+'/'+d[0];
+    var msg='Hola, Velvet Contour. Soy '+name+'.\nServicio: '+document.getElementById('fSvc').value+'\nFecha: '+fecha+'\nLocalidad: '+place+'\nPersonas: '+document.getElementById('fPeople').value+'\nEstilo: '+document.getElementById('fStyle').value;
+    var det=document.getElementById('fMsg').value.trim(); if(det){ msg+='\nDetalles: '+det; }
+    document.getElementById('prepText').textContent=msg;
+    document.getElementById('waLink').href='https://wa.me/34665788116?text='+encodeURIComponent(msg);
+    var p=document.getElementById('prepared'); p.hidden=false; p.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+  document.getElementById('copyBtn').addEventListener('click', function(){
+    var b=this, t=document.getElementById('prepText').textContent;
+    function done(){ b.textContent='Copiado'; setTimeout(function(){ b.textContent='Copiar mensaje'; },1800); }
+    function fallback(){ var r=document.createRange(); r.selectNodeContents(document.getElementById('prepText')); var s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent='Selecciona y copia'; }
+    try{ navigator.clipboard.writeText(t).then(done, fallback); }catch(_){ fallback(); }
+  });
+})();
+</script><script>document.querySelectorAll('img').forEach(function(i){i.addEventListener('error',function(){i.style.visibility='hidden'})});</script>
+</body>
+</html>
