@@ -362,6 +362,24 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
 .va-note{font-size:.64rem; color:var(--faint); text-align:center; padding:0 12px 10px; background:var(--bg-2)}
 @media (max-width:520px){ .va-panel{right:8px; left:8px; width:auto; bottom:calc(84px + env(safe-area-inset-bottom,0px)); height:calc(100dvh - 110px)} }
 @media (prefers-reduced-motion: reduce){ .va-btn::after{animation:none} .va-m,.va-chips,.va-wa{animation:none} }
+
+/* ===== Marcas ===== */
+#marcas{background:var(--bg-2); border-block:1px solid var(--line); text-align:center}
+#marcas .lead{margin:16px auto 0; max-width:52ch}
+.brands{list-style:none; display:grid; grid-template-columns:repeat(5,1fr); gap:28px; margin-top:56px}
+.brand-it{display:flex; flex-direction:column; align-items:center; gap:16px}
+.brand-c{width:132px; aspect-ratio:1; border-radius:50%; display:grid; place-items:center; position:relative; background:radial-gradient(circle at 32% 28%, rgba(227,165,116,.22), rgba(227,165,116,.04) 62%), var(--surface); border:1px solid rgba(227,165,116,.38); box-shadow:inset 0 0 0 6px var(--bg-2), inset 0 0 0 7px rgba(227,165,116,.22); transition:transform .4s ease, box-shadow .4s ease}
+.brand-it:hover .brand-c{transform:translateY(-4px); box-shadow:inset 0 0 0 6px var(--bg-2), inset 0 0 0 7px rgba(227,165,116,.5), 0 14px 30px -12px rgba(181,96,47,.55)}
+.brand-c b{font-weight:400; color:var(--accent); line-height:1.05; padding:0 14px}
+.bw-mac b{font:300 1.55rem/1 var(--body); letter-spacing:.42em; margin-right:-.42em}
+.bw-nars b{font:200 1.9rem/1 var(--body); letter-spacing:.06em}
+.bw-seph b{font:400 .78rem/1 var(--body); letter-spacing:.36em; margin-right:-.36em}
+.bw-estee b{font-family:var(--display); font-size:1.35rem; letter-spacing:.08em}
+.bw-estee b small{display:block; font-size:.8em; letter-spacing:.14em; margin-top:2px}
+.bw-bobbi b{font:300 1rem/1.25 var(--body); letter-spacing:.5em; margin-right:-.5em}
+.brand-n{font:600 .7rem/1.2 var(--body); letter-spacing:.2em; text-transform:uppercase; color:var(--muted)}
+@media (max-width:900px){ .brands{grid-template-columns:repeat(3,1fr); gap:30px 16px} }
+@media (max-width:520px){ .brands{grid-template-columns:repeat(2,1fr)} .brand-c{width:118px} .brand-it:last-child{grid-column:1/-1} .bw-nars b{font-size:1.55rem} .bw-mac b{font-size:1.3rem} .bw-seph b{font-size:.7rem; letter-spacing:.3em; margin-right:-.3em} .bw-bobbi b{font-size:.88rem} }
 </style>
 </head>
 <body>
@@ -559,6 +577,23 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="marcas">
+  <div class="wrap">
+    <div class="rv">
+      <span class="label">Marcas</span>
+      <h2 style="margin-top:16px">Grandes marcas, <em>resultados de alta calidad.</em></h2>
+      <p class="lead">Trabajamos con productos profesionales de primeras marcas para que tu maquillaje luzca impecable y dure todo el día.</p>
+    </div>
+    <ul class="brands rv" aria-label="Marcas con las que trabajamos">
+      <li class="brand-it bw-mac"><span class="brand-c" aria-hidden="true"><b>MAC</b></span><span class="brand-n">MAC Cosmetics</span></li>
+      <li class="brand-it bw-nars"><span class="brand-c" aria-hidden="true"><b>NARS</b></span><span class="brand-n">NARS</span></li>
+      <li class="brand-it bw-seph"><span class="brand-c" aria-hidden="true"><b>SEPHORA</b></span><span class="brand-n">Sephora</span></li>
+      <li class="brand-it bw-estee"><span class="brand-c" aria-hidden="true"><b>ESTÉE<small>LAUDER</small></b></span><span class="brand-n">Estée Lauder</span></li>
+      <li class="brand-it bw-bobbi"><span class="brand-c" aria-hidden="true"><b>BOBBI<br>BROWN</b></span><span class="brand-n">Bobbi Brown</span></li>
+    </ul>
   </div>
 </section>
 
