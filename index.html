@@ -16,6 +16,7 @@
   --bg:#150C09; --surface:#20130E; --ink:#F2E6DA; --muted:#C2AB9B; --line:#3A2820; --copper:#E3A574; --copper-soft:#E9B489; color-scheme:dark } }
 :root[data-theme="dark"]{ --bg:#150C09; --surface:#20130E; --ink:#F2E6DA; --muted:#C2AB9B; --line:#3A2820; --copper:#E3A574; --copper-soft:#E9B489; color-scheme:dark }
 
+[hidden]{display:none!important}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--bg); color:var(--ink); font-family:var(--body); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased}
@@ -97,6 +98,7 @@ section{padding-block:clamp(72px, 10vw, 128px)}
 .svc .wm{position:absolute; right:-60px; bottom:-60px; width:220px; opacity:.07; pointer-events:none}
 .svc .row{display:flex; justify-content:space-between; align-items:baseline; gap:12px}
 .svc h3{font-size:2.2rem}
+.svc .card-tag{font-size:.68rem; letter-spacing:.3em; text-transform:uppercase; color:var(--muted); margin-bottom:-6px}
 .svc .when{font-size:.7rem; letter-spacing:.26em; text-transform:uppercase; color:var(--copper)}
 .svc p{color:var(--muted); margin:0; max-width:46ch}
 .svc ul{margin:4px 0 8px; padding:0; list-style:none; display:flex; flex-wrap:wrap; gap:8px}
@@ -339,24 +341,28 @@ footer a{color:#D9A37A}
     </div>
     <div class="svc-grid">
       <article class="svc rv"><img class="wm" src="sello-liso.webp" alt="">
+        <span class="card-tag">1. Tarjeta</span>
         <div class="row"><h3>Novias</h3><span class="when">Con prueba</span></div>
         <p>Prueba previa para definir un estilismo impecable. Diseñado para garantizar máxima durabilidad y perfección desde la ceremonia hasta el baile.</p>
         <ul><li>Natural</li><li>Tendencia</li><li>Glam</li><li>Atrevida</li></ul>
         <div class="foot"><span class="price">Precio <strong>[a confirmar]</strong></span><a class="btn btn-line" href="#cita" data-svc="Maquillaje de novia">Reservar</a></div>
       </article>
       <article class="svc rv"><img class="wm" src="sello-liso.webp" alt="">
+        <span class="card-tag">2. Tarjeta</span>
         <div class="row"><h3>Invitadas</h3><span class="when">Bodas y fiestas</span></div>
         <p>Desde acabados naturales y luminosos hasta ahumados sofisticados. Un diseño adaptado a tu estilismo, al horario del evento y a tu personalidad.</p>
         <ul><li>Ahumados</li><li>Delineados</li><li>Piel luminosa</li></ul>
         <div class="foot"><span class="price">Precio <strong>[a confirmar]</strong></span><a class="btn btn-line" href="#cita" data-svc="Maquillaje de invitada">Reservar</a></div>
       </article>
       <article class="svc rv"><img class="wm" src="sello-liso.webp" alt="">
+        <span class="card-tag">3. Tarjeta</span>
         <div class="row"><h3>Madrinas</h3><span class="when">Prueba opcional</span></div>
         <p>Elegancia y equilibrio: preparación de piel madura, mirada definida con difuminados suaves y tonos en perfecta armonía.</p>
         <ul><li>Piel madura</li><li>Mirada suave</li><li>Larga duración</li></ul>
         <div class="foot"><span class="price">Precio <strong>[a confirmar]</strong></span><a class="btn btn-line" href="#cita" data-svc="Maquillaje de madrina">Reservar</a></div>
       </article>
       <article class="svc rv"><img class="wm" src="sello-liso.webp" alt="">
+        <span class="card-tag">4. Tarjeta</span>
         <div class="row"><h3>Eventos y fotografía</h3><span class="when">Luz y cámara</span></div>
         <p>Graduaciones, celebraciones especiales o sesiones fotográficas. Un maquillaje de alta definición diseñado para lucir impecable y favorecedor tanto al natural como ante la cámara.</p>
         <ul><li>Fotografía</li><li>Celebraciones</li><li>Grupos</li></ul>
