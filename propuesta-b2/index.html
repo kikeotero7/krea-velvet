@@ -292,7 +292,8 @@ footer .legal a:hover{color:var(--accent)}
 h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent) 38%, #F0B98A 55%, var(--accent) 72%, var(--accent-2) 100%); -webkit-background-clip:text; background-clip:text; color:transparent; padding-bottom:.08em}
 @supports not ((-webkit-background-clip:text) or (background-clip:text)){ h1 em, h2 em{color:var(--accent); background:none} }
 /* Fotos: fundido al cargar y acercamiento al pasar el ratón en servicios */
-.ph-img img{opacity:0; transition:opacity .9s ease, transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.ph-img img{transition:opacity .9s ease, transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.js .ph-img img:not(.ld){opacity:0}
 .ph-img img.ld{opacity:1}
 .panel .ph-img img:not(.in){opacity:0}
 .svc:hover .ph-img img, .svc:focus-within .ph-img img{transform:scale(1.05)}
@@ -400,7 +401,7 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
     </div>
     <div class="svc-grid">
       <article class="svc rv">
-        <div class="ph-img"><img src="https://images.unsplash.com/photo-1764269715774-43b6b03bcfda?auto=format&fit=crop&w=800&q=75" alt="Maquilladora preparando a una novia el día de la boda" loading="lazy"></div>
+        <div class="ph-img"><img src="https://images.unsplash.com/photo-1773688189414-7637b9b138e1?auto=format&fit=crop&w=800&q=75" alt="Maquilladora aplicando colorete a una novia" loading="lazy"></div>
         <div class="svc-body">
           <h3>Novias</h3><span class="when">Con prueba</span>
           <p>Prueba previa para definir un estilismo impecable. Diseñado para garantizar máxima durabilidad y perfección desde la ceremonia hasta el baile.</p>
@@ -409,7 +410,7 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
         </div>
       </article>
       <article class="svc rv">
-        <div class="ph-img"><img src="https://images.unsplash.com/photo-1773688189414-7637b9b138e1?auto=format&fit=crop&w=700&q=75" alt="Maquilladora aplicando colorete a una invitada" loading="lazy"></div>
+        <div class="ph-img"><img src="https://images.unsplash.com/photo-1764269715774-43b6b03bcfda?auto=format&fit=crop&w=700&q=75" alt="Maquilladora preparando a una clienta para una boda" loading="lazy"></div>
         <div class="svc-body">
           <h3>Invitadas</h3><span class="when">Bodas y fiestas</span>
           <p>Desde acabados naturales y luminosos hasta ahumados sofisticados. Un diseño adaptado a tu estilismo, al horario del evento y a tu personalidad.</p>
@@ -704,6 +705,6 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
     try{ navigator.clipboard.writeText(t).then(done, fallback); }catch(_){ fallback(); }
   });
 })();
-</script><script>document.querySelectorAll('img').forEach(function(i){i.addEventListener('error',function(){i.style.visibility='hidden'}); if(i.closest('.ph-img')){ var d=function(){i.classList.add('ld')}; if(i.complete&&i.naturalWidth) d(); else i.addEventListener('load',d);} });</script>
+</script><script>document.querySelectorAll('img').forEach(function(i){i.addEventListener('error',function(){i.style.visibility='hidden'}); if(i.closest('.ph-img')){ var d=function(){i.classList.add('ld')}; if(i.complete&&i.naturalWidth) d(); else i.addEventListener('load',d);} }); setTimeout(function(){document.querySelectorAll('.ph-img img').forEach(function(i){i.classList.add('ld')})},1800); document.documentElement.classList.add('js');</script>
 </body>
 </html>
