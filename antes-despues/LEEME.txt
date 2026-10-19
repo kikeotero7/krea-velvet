@@ -1,0 +1,7 @@
+Comparador "Antes y después" de la sección Trabajos.
+
+Sube aquí dos fotos con el MISMO encuadre (vertical 4:5, mínimo 1200 x 1500 px, en .webp):
+  antes.webp    -> cara sin maquillar
+  despues.webp  -> el maquillaje terminado de Velvet Contour
+
+En cuanto existan las dos, la tarjeta "Próximamente" se convierte sola en el comparador arrastrable.

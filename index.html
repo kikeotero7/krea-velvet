@@ -216,6 +216,21 @@ section{padding-block:clamp(84px, 11vw, 150px)}
 .ph-img.empty span{font-size:.68rem; letter-spacing:.26em; text-transform:uppercase; color:var(--faint)}
 .g figcaption{background:color-mix(in srgb, var(--bg) 70%, transparent); color:var(--ink)}
 
+/* Antes y después: comparador arrastrable */
+.ba-wrap{position:absolute; inset:0; --p:50%; touch-action:pan-y; cursor:ew-resize; user-select:none; -webkit-user-select:none}
+.ba-wrap img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:none; pointer-events:none}
+.ph-img.ba:not(.empty)::after{display:none}
+.ba-before{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.ba-line{position:absolute; top:0; bottom:0; left:var(--p); width:2px; margin-left:-1px; background:#F3E8DC; box-shadow:0 0 12px rgba(0,0,0,.35); pointer-events:none}
+.ba-knob{position:absolute; top:50%; left:var(--p); width:46px; height:46px; margin:-23px 0 0 -23px; border-radius:50%; background:color-mix(in srgb, #130C09 55%, transparent); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); border:1.5px solid #F3E8DC; display:grid; place-items:center; color:#F3E8DC; pointer-events:none; transition:transform .25s ease}
+.ba-knob svg{width:22px; height:22px}
+.ba-wrap.drag .ba-knob{transform:scale(1.08)}
+.ba-range{position:absolute; width:1px; height:1px; opacity:0; pointer-events:none}
+.ba-range:focus-visible ~ .ba-knob{outline:2px solid var(--accent); outline-offset:4px}
+.ba-tag{position:absolute; top:16px; font-size:.62rem; letter-spacing:.24em; text-transform:uppercase; color:#F3E8DC; background:rgba(19,12,9,.5); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); padding:6px 11px; border-radius:999px; pointer-events:none}
+.ba-tag.l{left:16px} .ba-tag.r{right:16px}
+@media (max-width:760px){ .ba-tag{display:none} .ba-knob{width:38px; height:38px; margin:-19px 0 0 -19px} }
+
 /* Cita */
 .book-grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:64px}
 .book h2{margin:16px 0 18px}
@@ -448,7 +463,7 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
 
 <section id="como">
   <div class="wrap how">
-    <div class="ph-img arch rv"><img src="https://images.unsplash.com/photo-1764269719546-afc8567db7c6?auto=format&fit=crop&w=900&q=75" alt="Kit profesional de maquillaje sobre un tocador" loading="lazy"></div>
+    <div class="ph-img arch rv"><img src="https://images.unsplash.com/photo-1764269719546-afc8567db7c6?auto=format&fit=crop&w=900&q=75" srcset="https://images.unsplash.com/photo-1764269719546-afc8567db7c6?auto=format&fit=crop&w=900&q=75 1x, https://images.unsplash.com/photo-1764269719546-afc8567db7c6?auto=format&fit=crop&w=900&q=75&amp;dpr=2 2x" alt="Kit profesional de maquillaje sobre un tocador" loading="lazy"></div>
     <div>
       <div class="rv">
         <span class="label">Cómo trabajamos</span>
@@ -472,7 +487,7 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
     </div>
     <div class="svc-grid">
       <article class="svc rv">
-        <div class="ph-img"><img src="https://images.unsplash.com/photo-1774814304885-bb5cc796a6c3?auto=format&fit=crop&w=800&q=75" alt="Maquilladora preparando a la novia antes de la ceremonia" loading="lazy"></div>
+        <div class="ph-img"><img src="https://images.unsplash.com/photo-1774814304885-bb5cc796a6c3?auto=format&fit=crop&w=800&q=75" srcset="https://images.unsplash.com/photo-1774814304885-bb5cc796a6c3?auto=format&fit=crop&w=800&q=75 1x, https://images.unsplash.com/photo-1774814304885-bb5cc796a6c3?auto=format&fit=crop&w=800&q=75&amp;dpr=2 2x" alt="Maquilladora preparando a la novia antes de la ceremonia" loading="lazy"></div>
         <div class="svc-body">
           <h3>Novias</h3><span class="when">Con prueba</span>
           <p>Prueba previa para definir un estilismo impecable. Diseñado para garantizar máxima durabilidad y perfección desde la ceremonia hasta el baile.</p>
@@ -481,7 +496,7 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
         </div>
       </article>
       <article class="svc rv">
-        <div class="ph-img"><img src="https://images.unsplash.com/photo-1709477542170-f11ee7d471a0?auto=format&fit=crop&w=700&q=75" alt="Maquilladora aplicando sombra de ojos a una invitada" loading="lazy"></div>
+        <div class="ph-img"><img src="https://images.unsplash.com/photo-1709477542170-f11ee7d471a0?auto=format&fit=crop&w=700&q=75" srcset="https://images.unsplash.com/photo-1709477542170-f11ee7d471a0?auto=format&fit=crop&w=700&q=75 1x, https://images.unsplash.com/photo-1709477542170-f11ee7d471a0?auto=format&fit=crop&w=700&q=75&amp;dpr=2 2x" alt="Maquilladora aplicando sombra de ojos a una invitada" loading="lazy"></div>
         <div class="svc-body">
           <h3>Invitadas</h3><span class="when">Bodas y fiestas</span>
           <p>Desde acabados naturales y luminosos hasta ahumados sofisticados. Un diseño adaptado a tu estilismo, al horario del evento y a tu personalidad.</p>
@@ -490,7 +505,7 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
         </div>
       </article>
       <article class="svc rv">
-        <div class="ph-img"><img src="https://images.unsplash.com/photo-1646335940347-819e906aee46?auto=format&fit=crop&w=700&q=75" alt="Madrina maquillándose antes de la boda" loading="lazy"></div>
+        <div class="ph-img"><img src="https://images.unsplash.com/photo-1646335940347-819e906aee46?auto=format&fit=crop&w=700&q=75" srcset="https://images.unsplash.com/photo-1646335940347-819e906aee46?auto=format&fit=crop&w=700&q=75 1x, https://images.unsplash.com/photo-1646335940347-819e906aee46?auto=format&fit=crop&w=700&q=75&amp;dpr=2 2x" alt="Madrina maquillándose antes de la boda" loading="lazy"></div>
         <div class="svc-body">
           <h3>Madrinas</h3><span class="when">Prueba opcional</span>
           <p>Elegancia y equilibrio: preparación de piel madura, mirada definida con difuminados suaves y tonos en perfecta armonía.</p>
@@ -499,7 +514,7 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
         </div>
       </article>
       <article class="svc rv">
-        <div class="ph-img"><img src="https://images.unsplash.com/photo-1758613656229-d7434bf4b7ea?auto=format&fit=crop&w=700&q=75" alt="Maquilladora trabajando con un modelo en un estudio de fotografía" loading="lazy"></div>
+        <div class="ph-img"><img src="https://images.unsplash.com/photo-1758613656229-d7434bf4b7ea?auto=format&fit=crop&w=700&q=75" srcset="https://images.unsplash.com/photo-1758613656229-d7434bf4b7ea?auto=format&fit=crop&w=700&q=75 1x, https://images.unsplash.com/photo-1758613656229-d7434bf4b7ea?auto=format&fit=crop&w=700&q=75&amp;dpr=2 2x" alt="Maquilladora trabajando con un modelo en un estudio de fotografía" loading="lazy"></div>
         <div class="svc-body">
           <h3>Eventos y fotografía</h3><span class="when">Luz y cámara</span>
           <p>Graduaciones, celebraciones especiales o sesiones fotográficas. Un maquillaje de alta definición diseñado para lucir impecable y favorecedor tanto al natural como ante la cámara.</p>
@@ -512,7 +527,7 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
 </section>
 
 <section class="quiz" id="orientador">
-  <div class="quiz-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1677001458966-de3f79363c12?auto=format&fit=crop&w=1100&q=75" alt="" loading="lazy"></div>
+  <div class="quiz-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1677001458966-de3f79363c12?auto=format&fit=crop&w=1100&q=75" srcset="https://images.unsplash.com/photo-1677001458966-de3f79363c12?auto=format&fit=crop&w=1100&q=75 1x, https://images.unsplash.com/photo-1677001458966-de3f79363c12?auto=format&fit=crop&w=1100&q=75&amp;dpr=2 2x" alt="" loading="lazy"></div>
   <div class="wrap">
     <div>
       <div class="rv" style="margin-bottom:36px">
@@ -568,7 +583,7 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
         <button class="tab" role="tab" id="t4" aria-selected="false" aria-controls="tpanel">Maquillaje y cámara</button>
       </div>
       <div class="panel rv" role="tabpanel" id="tpanel" aria-labelledby="t0">
-        <div class="ph-img"><img id="tImg" class="in" src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1000&q=75" alt="" loading="lazy"></div>
+        <div class="ph-img"><img id="tImg" class="in" src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1000&q=75" srcset="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1000&q=75 1x, https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1000&q=75&amp;dpr=2 2x" alt="" loading="lazy"></div>
         <div class="panel-body">
           <span class="label" id="tNum">Técnica 1 de 5</span>
           <h3 id="tTitle">Piel</h3>
@@ -607,7 +622,7 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
     <div class="gallery">
       <figure class="g rv"><div class="ph-img empty"><img class="wm" src="sello-liso.webp" alt="" loading="lazy"><span>Próximamente</span></div><figcaption>Novia · próximamente</figcaption></figure>
       <figure class="g rv"><div class="ph-img empty"><img class="wm" src="sello-liso.webp" alt="" loading="lazy"><span>Próximamente</span></div><figcaption>Invitada · próximamente</figcaption></figure>
-      <figure class="g rv"><div class="ph-img empty"><img class="wm" src="sello-liso.webp" alt="" loading="lazy"><span>Próximamente</span></div><figcaption>Antes y después</figcaption></figure>
+      <figure class="g rv"><div class="ph-img empty ba" data-before="antes-despues/antes.webp" data-after="antes-despues/despues.webp" data-alt="Maquillaje de Velvet Contour"><img class="wm" src="sello-liso.webp" alt="" loading="lazy"><span>Próximamente</span></div><figcaption>Antes y después</figcaption></figure>
       <figure class="g rv"><div class="ph-img empty"><img class="wm" src="sello-liso.webp" alt="" loading="lazy"><span>Próximamente</span></div><figcaption>Madrina · próximamente</figcaption></figure>
       <figure class="g rv"><div class="ph-img empty"><img class="wm" src="sello-liso.webp" alt="" loading="lazy"><span>Próximamente</span></div><figcaption>Sesión de fotos</figcaption></figure>
       <figure class="g rv"><div class="ph-img empty"><img class="wm" src="sello-liso.webp" alt="" loading="lazy"><span>Próximamente</span></div><figcaption>Detrás de cámara</figcaption></figure>
@@ -664,7 +679,7 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
 </section>
 
 <section class="close">
-  <div class="close-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1704621354138-e124277356f2?auto=format&fit=crop&w=1600&q=75" alt="" loading="lazy"></div>
+  <div class="close-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1704621354138-e124277356f2?auto=format&fit=crop&w=1600&q=75" srcset="https://images.unsplash.com/photo-1704621354138-e124277356f2?auto=format&fit=crop&w=1600&q=75 1x, https://images.unsplash.com/photo-1704621354138-e124277356f2?auto=format&fit=crop&w=1600&q=75&amp;dpr=2 2x" alt="" loading="lazy"></div>
   <div class="wrap rv">
     <img class="big" src="sello-completo.webp" alt="Velvet Contour · Atelier de maquillaje">
     <h2>Tu experiencia de belleza <em>empieza aquí.</em></h2>
@@ -771,7 +786,7 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
     document.getElementById('tText').textContent=techs[i][1];
     var c=document.getElementById('tChips'); c.textContent='';
     techs[i][2].forEach(function(x){ var s=document.createElement('span'); s.textContent=x; c.appendChild(s); });
-    var im=document.getElementById('tImg'); if(im && window.TIMG){ im.classList.remove('in'); im.src=TIMG[i]; im.onload=function(){ im.classList.add('in'); }; }
+    var im=document.getElementById('tImg'); if(im && window.TIMG){ im.classList.remove('in'); im.srcset=TIMG[i]+' 1x, '+TIMG[i]+'&dpr=2 2x'; im.src=TIMG[i]; im.onload=function(){ im.classList.add('in'); }; }
   }
   tabs.forEach(function(t,i){
     t.addEventListener('click', function(){ showTech(i); });
@@ -923,6 +938,32 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
   var seen=false; try{seen=sessionStorage.getItem('va-hint')==='1'}catch(_){}
   if(!seen) setTimeout(function(){ if(!started){ hint.classList.add('on'); try{sessionStorage.setItem('va-hint','1')}catch(_){} setTimeout(function(){hint.classList.remove('on')},7000);} },6000);
 })();
+</script>
+<script>
+/* Antes y después: se activa solo cuando existen las dos fotos */
+document.querySelectorAll('.ph-img.ba').forEach(function(box){
+  var b=new Image(), a=new Image(), ok=0;
+  function ready(){ if(++ok<2) return;
+    var alt=box.getAttribute('data-alt')||'';
+    box.classList.remove('empty'); box.innerHTML=
+      '<div class="ba-wrap">'+
+      '<img class="ld" src="'+a.src+'" alt="Después: '+alt+'">'+
+      '<div class="ba-before" style="position:absolute;inset:0"><img class="ld" src="'+b.src+'" alt="Antes: '+alt+'"></div>'+
+      '<span class="ba-tag l">Antes</span><span class="ba-tag r">Después</span>'+
+      '<input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Comparar antes y después">'+
+      '<span class="ba-line"></span><span class="ba-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>';
+    var w=box.querySelector('.ba-wrap'), r=box.querySelector('.ba-range'), on=false;
+    function set(v){ v=Math.max(0,Math.min(100,v)); w.style.setProperty('--p',v+'%'); r.value=Math.round(v); }
+    function at(e){ var q=w.getBoundingClientRect(); set((e.clientX-q.left)/q.width*100); }
+    w.addEventListener('pointerdown',function(e){ e.preventDefault(); on=true; w.classList.add('drag'); at(e); r.focus({preventScroll:true}); });
+    w.addEventListener('pointermove',function(e){ if(on||e.pointerType==='mouse'&&e.buttons) at(e); });
+    window.addEventListener('pointerup',function(){ on=false; w.classList.remove('drag'); });
+    window.addEventListener('pointercancel',function(){ on=false; w.classList.remove('drag'); });
+    r.addEventListener('input',function(){ set(+r.value); });
+  }
+  b.onload=a.onload=ready;
+  b.src=box.getAttribute('data-before'); a.src=box.getAttribute('data-after');
+});
 </script>
 </body>
 </html>
