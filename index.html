@@ -29,6 +29,11 @@
 .svc:nth-child(4) .ph-img img{--kb-o:60% 65%; --kb-t:24s; animation-delay:-3s}
 @keyframes kenburns{from{transform:scale(1.02) translate3d(0,0,0)}to{transform:scale(1.16) translate3d(-2.5%,-2%,0)}}
 @media (prefers-reduced-motion: reduce){ .how .ph-img img, .svc .ph-img img{animation:none} }
+
+/* Cierre: el polvo de la foto fluye (WebGL); la foto queda como respaldo */
+.close-bg .flow{position:absolute; inset:0; width:100%; height:100%; opacity:0; transition:opacity 1.2s ease; filter:sepia(.25) saturate(.95); -webkit-mask-image:radial-gradient(ellipse 70% 80% at 50% 50%, #000 25%, transparent 78%); mask-image:radial-gradient(ellipse 70% 80% at 50% 50%, #000 25%, transparent 78%)}
+.close-bg.gl .flow{opacity:.55}
+.close-bg.gl img{opacity:0!important}
 </style>
 <style>
 /* Propuesta B · editorial con arcos. Oscura completa por defecto, clara completa con data-look="clara". */
@@ -674,7 +679,7 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
 </section>
 
 <section class="close">
-  <div class="close-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1704621354138-e124277356f2?auto=format&fit=crop&w=1600&q=75" alt="" loading="lazy"></div>
+  <div class="close-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1704621354138-e124277356f2?auto=format&fit=crop&w=1600&q=75" alt="" loading="lazy"><canvas class="flow" id="flow"></canvas></div>
   <div class="wrap rv">
     <img class="big" src="sello-completo.webp" alt="Velvet Contour · Atelier de maquillaje">
     <h2>Tu experiencia de belleza <em>empieza aquí.</em></h2>
@@ -932,6 +937,45 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
   form.onsubmit=function(e){ e.preventDefault(); var v=inp.value; if(!v.trim()) return; inp.value=''; handle(v,true); };
   var seen=false; try{seen=sessionStorage.getItem('va-hint')==='1'}catch(_){}
   if(!seen) setTimeout(function(){ if(!started){ hint.classList.add('on'); try{sessionStorage.setItem('va-hint','1')}catch(_){} setTimeout(function(){hint.classList.remove('on')},7000);} },6000);
+})();
+</script>
+<script>
+(function(){
+  var cv=document.getElementById('flow'); if(!cv||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var box=cv.parentNode, src=box.querySelector('img'), gl=cv.getContext('webgl',{premultipliedAlpha:false}); if(!gl) return;
+  var VS='attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
+  var FS=['precision mediump float;varying vec2 v;uniform sampler2D T;uniform float t;uniform vec2 sc;uniform vec3 M;',
+  'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+  'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}',
+  'float e(vec2 u,vec2 c,vec2 r){vec2 d=(u-c)/r;return smoothstep(1.,.6,length(d));}',
+  'vec2 flow(vec2 u){float a=n(u*3.+vec2(0.,t*.05))*6.283;return vec2(.35+.5*cos(a),-.9+.45*sin(a));}',
+  'void main(){vec2 u=vec2(v.x,1.-v.y);u=(u-.5)*sc+.5;',
+  // proteger brochas (cabeza+mango superior, cabeza inferior)
+  'float k=max(max(e(u,vec2(.45,.38),vec2(.18,.15)),e(u,vec2(.16,.355),vec2(.2,.06))),max(e(u,vec2(.68,.69),vec2(.2,.13)),e(u,vec2(.86,.66),vec2(.16,.07))));',
+  'float m=1.-k;vec2 dm=(u-M.xy)*vec2(1.,sc.y/sc.x);float r=exp(-dot(dm,dm)/.012)*M.z*m;u-=(normalize(dm+1e-5)*.6+vec2(-dm.y,dm.x)*8.)*r*.035;vec2 f=flow(u)*.045*m;float ph=t*.12;float a=fract(ph),b=fract(ph+.5);',
+  'vec4 c1=texture2D(T,u+f*(a-.5)*vec2(1.,1.));vec4 c2=texture2D(T,u+f*(b-.5));float w=abs(1.-2.*a);',
+  'vec4 c=mix(c1,c2,w);float L=dot(c.rgb,vec3(.3,.59,.11));',
+  'c.rgb*=1.+m*smoothstep(.25,.7,L)*.6*(n(u*240.+t*1.3)-.35);',
+  'gl_FragColor=vec4(c.rgb,1.);}'].join('');
+  function sh(t,s){var o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o;}
+  var pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,VS));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,FS));gl.linkProgram(pr);
+  if(!gl.getProgramParameter(pr,gl.LINK_STATUS)) return; gl.useProgram(pr);
+  var bf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,bf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  var lp=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(lp);gl.vertexAttribPointer(lp,2,gl.FLOAT,false,0,0);
+  var uM=gl.getUniformLocation(pr,'M'),mx=.5,my=.5,ms=0,tm=0;var uT=gl.getUniformLocation(pr,'t'),uS=gl.getUniformLocation(pr,'sc'),run=false,ok=false,t0=performance.now(),iw=1,ih=1;
+  function size(){var d=Math.min(1.5,devicePixelRatio||1),W=cv.clientWidth,H=cv.clientHeight;cv.width=W*d;cv.height=H*d;gl.viewport(0,0,cv.width,cv.height);
+    var ca=W/H,ia=iw/ih;gl.uniform2f(uS,ca>ia?1:ca/ia,ca>ia?ia/ca:1);}
+  function frame(){if(!run)return;tm*=.96;ms+=(tm-ms)*.08;gl.uniform3f(uM,mx,my,ms);gl.uniform1f(uT,(performance.now()-t0)/1000);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);requestAnimationFrame(frame);}
+  var im=new Image();im.crossOrigin='anonymous';
+  im.onload=function(){iw=im.naturalWidth;ih=im.naturalHeight;var tx=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,tx);
+    try{gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,im);}catch(_){return;}
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+    var sec=box.parentNode;function mv(e){var r=cv.getBoundingClientRect(),q=e.touches?e.touches[0]:e;if(!q)return;var x=(q.clientX-r.left)/r.width,y=(q.clientY-r.top)/r.height;var g=gl.getUniformLocation&&cv.width/cv.height,ia=iw/ih,sx=g>ia?1:g/ia,sy=g>ia?ia/g:1;mx=(x-.5)*sx+.5;my=(y-.5)*sy+.5;tm=1;}
+    sec.addEventListener('pointermove',mv,{passive:true});sec.addEventListener('touchmove',mv,{passive:true});
+    ok=true;size();box.classList.add('gl');addEventListener('resize',size);
+    new IntersectionObserver(function(es){var on=es[0].isIntersecting;if(on&&!run){run=true;requestAnimationFrame(frame);}else if(!on)run=false;}).observe(box);};
+  im.src=src.currentSrc||src.src;
 })();
 </script>
 </body>
