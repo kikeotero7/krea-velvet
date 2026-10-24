@@ -296,7 +296,7 @@ footer .legal a:hover{color:var(--accent)}
 :root:not([data-look="clara"]) body::before{content:""; position:fixed; inset:0; z-index:100; pointer-events:none; opacity:.055; mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 .9 0 0 0 0 .8 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 /* Brillo cobre en las cursivas de los titulares */
-h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent) 38%, #F0B98A 55%, var(--accent) 72%, var(--accent-2) 100%); -webkit-background-clip:text; background-clip:text; color:transparent; padding-bottom:.08em}
+h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent) 38%, #F0B98A 55%, var(--accent) 72%, var(--accent-2) 100%); -webkit-background-clip:text; background-clip:text; color:transparent; padding-bottom:.08em; padding-right:.14em; margin-right:-.14em; -webkit-box-decoration-break:clone; box-decoration-break:clone}
 @supports not ((-webkit-background-clip:text) or (background-clip:text)){ h1 em, h2 em{color:var(--accent); background:none} }
 /* Fotos: fundido al cargar y acercamiento al pasar el ratón en servicios */
 .ph-img img{transition:opacity .9s ease, transform 1.2s cubic-bezier(.2,.7,.2,1)}
