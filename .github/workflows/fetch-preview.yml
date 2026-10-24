@@ -1,0 +1,18 @@
+name: fetch-preview-images
+on:
+  push:
+    branches: [claude/amazing-bell-b07emd]
+    paths: [preview-urls.txt]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p preview-img
+          while read u; do id=$(echo "$u" | sed -E 's#.*/(photo-[^?]+).*#\1#'); curl -sSfL "$u" -o "preview-img/$id.jpg"; done < preview-urls.txt
+          ls -la preview-img
+          git config user.name "github-actions"; git config user.email "actions@github.com"
+          git add preview-img && git commit -m "Fotos para la vista previa" && git push
