@@ -29,6 +29,11 @@
 .svc:nth-child(4) .ph-img img{--kb-o:60% 65%; --kb-t:24s; animation-delay:-3s}
 @keyframes kenburns{from{transform:scale(1.02) translate3d(0,0,0)}to{transform:scale(1.16) translate3d(-2.5%,-2%,0)}}
 @media (prefers-reduced-motion: reduce){ .how .ph-img img, .svc .ph-img img{animation:none} }
+
+/* Cierre: brocha con polvos en movimiento */
+.close-bg img{animation:kenburns 30s ease-in-out infinite alternate; transform-origin:45% 45%}
+.close-bg .dust{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; -webkit-mask-image:radial-gradient(ellipse 70% 80% at 50% 50%, #000 25%, transparent 78%); mask-image:radial-gradient(ellipse 70% 80% at 50% 50%, #000 25%, transparent 78%)}
+@media (prefers-reduced-motion: reduce){ .close-bg img{animation:none} .close-bg .dust{display:none} }
 </style>
 <style>
 /* Propuesta B · editorial con arcos. Oscura completa por defecto, clara completa con data-look="clara". */
@@ -674,7 +679,7 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
 </section>
 
 <section class="close">
-  <div class="close-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1704621354138-e124277356f2?auto=format&fit=crop&w=1600&q=75" alt="" loading="lazy"></div>
+  <div class="close-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1704621354138-e124277356f2?auto=format&fit=crop&w=1600&q=75" alt="" loading="lazy"><canvas class="dust" id="dust"></canvas></div>
   <div class="wrap rv">
     <img class="big" src="sello-completo.webp" alt="Velvet Contour · Atelier de maquillaje">
     <h2>Tu experiencia de belleza <em>empieza aquí.</em></h2>
@@ -932,6 +937,30 @@ h1 em, h2 em{background:linear-gradient(100deg, var(--accent-2) 0%, var(--accent
   form.onsubmit=function(e){ e.preventDefault(); var v=inp.value; if(!v.trim()) return; inp.value=''; handle(v,true); };
   var seen=false; try{seen=sessionStorage.getItem('va-hint')==='1'}catch(_){}
   if(!seen) setTimeout(function(){ if(!started){ hint.classList.add('on'); try{sessionStorage.setItem('va-hint','1')}catch(_){} setTimeout(function(){hint.classList.remove('on')},7000);} },6000);
+})();
+</script>
+<script>
+(function(){
+  var c=document.getElementById('dust'); if(!c||!c.getContext||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var ctx=c.getContext('2d'), sec=c.closest('.close'), W=0, H=0, dpr=1, P=[], run=false, last=0;
+  var COL=['244,214,170','236,190,150','226,160,140','255,236,210','214,150,120'];
+  function size(){ dpr=Math.min(2,window.devicePixelRatio||1); W=c.clientWidth; H=c.clientHeight; c.width=W*dpr; c.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    var n=Math.round(Math.min(220, Math.max(80, W*H/7000))); P=[]; for(var i=0;i<n;i++) P.push(make(true)); }
+  function make(any){ var r=Math.random();
+    return {x:W*(.25+Math.random()*.6), y:any?Math.random()*H:H*(.55+Math.random()*.5), s:r<.85?.5+Math.random()*1.3:1.6+Math.random()*1.6,
+      vx:.05+Math.random()*.22, vy:-(.06+Math.random()*.28), w:Math.random()*6.28, ws:.004+Math.random()*.012,
+      a:.4+Math.random()*.55, tw:.002+Math.random()*.006, c:COL[(Math.random()*COL.length)|0], life:0, max:500+Math.random()*900}; }
+  function tick(t){ if(!run) return; var dt=Math.min(3,(t-last)/16.7||1); last=t; ctx.clearRect(0,0,W,H);
+    for(var i=0;i<P.length;i++){ var p=P[i]; p.life+=dt; p.w+=p.ws*dt;
+      p.x+=(p.vx+Math.sin(p.w)*.18)*dt; p.y+=(p.vy+Math.cos(p.w*.7)*.08)*dt;
+      var f=Math.min(1,p.life/80, (p.max-p.life)/120), al=p.a*f*(.65+.35*Math.sin(t*p.tw+i));
+      if(p.life>p.max||p.y<-10||p.x>W+10){ P[i]=make(false); continue; }
+      ctx.beginPath(); ctx.fillStyle='rgba('+p.c+','+Math.max(0,al).toFixed(3)+')'; ctx.arc(p.x,p.y,p.s,0,6.283); ctx.fill();
+      if(p.s>2){ ctx.beginPath(); ctx.fillStyle='rgba('+p.c+','+(Math.max(0,al)*.18).toFixed(3)+')'; ctx.arc(p.x,p.y,p.s*3,0,6.283); ctx.fill(); } }
+    requestAnimationFrame(tick); }
+  function start(){ if(run) return; run=true; last=performance.now(); requestAnimationFrame(tick); }
+  size(); addEventListener('resize', function(){ size(); });
+  if('IntersectionObserver' in window){ new IntersectionObserver(function(e){ if(e[0].isIntersecting) start(); else run=false; }).observe(sec); } else start();
 })();
 </script>
 </body>
